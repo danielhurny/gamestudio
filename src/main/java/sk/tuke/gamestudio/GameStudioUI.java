@@ -87,6 +87,7 @@ public class GameStudioUI {
 			gamePlayed += "Kamene";
 			gamescore = consoleUiKamene.newGameStarted();
 			break;
+		default: processInput();	
 
 		}
 

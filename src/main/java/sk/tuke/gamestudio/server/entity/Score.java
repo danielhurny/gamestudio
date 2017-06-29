@@ -1,6 +1,6 @@
 package sk.tuke.gamestudio.server.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Score {
 	
@@ -61,7 +61,7 @@ public class Score {
 
 	@Override
 	public String toString() {
-		return "Score [player=" + player + ", game=" + game + ", points=" + points + ", date=" + date + "]";
+		return "Hrac: " + player + " Hra: " + game + " Body" + points + " Datum :" + date;
 	}
 	
 	

@@ -1,7 +1,8 @@
 package sk.tuke.gamestudio.server.service;
 
 import java.sql.Connection;
-import java.sql.Date;
+
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import sk.tuke.gamestudio.server.entity.Score;
@@ -47,7 +49,7 @@ public class ScoreServiceJDBC implements ScoreService {
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
-				Score sc = new Score(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTimestamp(4));
+				Score sc = new Score(rs.getString(1), rs.getString(2), rs.getInt(3), getSQLCurrentDate());
 				score.add(sc);
 			}
 
@@ -59,5 +61,9 @@ public class ScoreServiceJDBC implements ScoreService {
 		// TODO Auto-generated method stub
 		return score;
 	}
+	
+	private java.sql.Date getSQLCurrentDate() {
+		return new java.sql.Date(new Date().getTime());
 
 }
+	}
