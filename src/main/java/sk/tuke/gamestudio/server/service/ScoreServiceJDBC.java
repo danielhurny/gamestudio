@@ -15,13 +15,13 @@ import sk.tuke.gamestudio.server.entity.Score;
 
 public class ScoreServiceJDBC implements ScoreService {
 
-//	private DatabaseSettings ds=new DatabaseSettings();
+	private DatabaseSettings ds=new DatabaseSettings();
 	public static final String INSERT_QUERY = "INSERT INTO SCORE (player,game,points,playedon) " + "VALUES (?, ?,?,?)";
 	public static final String GET_BEST_SCORES = "SELECT player,game,points,playedon FROM score WHERE game = ?";
 
 	@Override
 	public void addScore(Score score)throws ScoreException {
-		try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost/gamestudio", "postgres", "postgres");
+		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER, ds.PASSWORD);
 				PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
 			stm.setString(1, score.getPlayer());
 			stm.setString(2, score.getGame());
@@ -40,7 +40,7 @@ public class ScoreServiceJDBC implements ScoreService {
 	@Override
 	public List<Score> getBestScores(String game) throws ScoreException {
 		List<Score> score = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost/gamestudio", "postgres", "postgres");
+		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER, ds.PASSWORD);
 				PreparedStatement stm = con.prepareStatement(GET_BEST_SCORES);
 				) {
 			stm.setString(1, game);

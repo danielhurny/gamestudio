@@ -2,7 +2,7 @@ package sk.tuke.gamestudio.game.kamene.core;
 
 import java.io.Serializable;
 
-public class emptyTile extends Tile implements Serializable {
+public class EmptyTile extends Tile implements Serializable {
 
 	private int k;
 	private int j;
@@ -10,7 +10,7 @@ public class emptyTile extends Tile implements Serializable {
 
 	private final String mark = "-";
 
-	public emptyTile(int row, int column) {
+	public EmptyTile(int row, int column) {
 		k = row;
 		j = column;
 

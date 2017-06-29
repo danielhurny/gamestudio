@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class DatabaseSettings {
 	
-	protected static final String DATABASE_PROPERTIES = "C:\\Users\\P3502712\\workspace-academy\\maven\\gamestudio\\gamestudio\\src\\main\\resources\\application.properties";
+	protected static final String DATABASE_PROPERTIES = "/application.properties";
 
 
     public static String DRIVERCLASS;
@@ -33,6 +33,8 @@ public class DatabaseSettings {
         } catch (IOException e) {
            e.printStackTrace();
         }
+        
+       
     }
 }
 

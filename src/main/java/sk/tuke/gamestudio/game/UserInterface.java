@@ -1,6 +1,7 @@
-package sk.tuke.gamestudio.game.minesweeper;
+package sk.tuke.gamestudio.game;
 
-import sk.tuke.gamestudio.game.minesweeper.core.Field;
+import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
+import sk.tuke.gamestudio.server.entity.Score;
 
 public interface UserInterface {
 
@@ -8,7 +9,7 @@ public interface UserInterface {
 	 * Starts the game.
 	 * @param field field of mines and clues
 	 */
-	void newGameStarted();
+	Score newGameStarted();
 
 	/**
 	 * Updates user interface - prints the field.

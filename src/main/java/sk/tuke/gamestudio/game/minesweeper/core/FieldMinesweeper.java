@@ -6,13 +6,14 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.minesweeper.core.Tile.State;
 
 
 /**
  * Field represents playing field and game logic.
  */
-public class Field {
+public class FieldMinesweeper {
 	/**
 	 * Playing field tiles.
 	 */
@@ -52,7 +53,7 @@ public class Field {
 	 * @param mineCount
 	 *            mine count
 	 */
-	public Field(int rowCount, int columnCount, int mineCount) {
+	public FieldMinesweeper(int rowCount, int columnCount, int mineCount) {
 		this.rowCount = rowCount;
 		this.columnCount = columnCount;
 		this.mineCount = mineCount;

@@ -2,8 +2,8 @@ package sk.tuke.gamestudio.game.kamene;
 
 import java.util.Date;
 
-import sk.tuke.gamestudio.game.kamene.consoleui.consoleui;
-import sk.tuke.gamestudio.game.kamene.core.Field;
+import sk.tuke.gamestudio.game.kamene.consoleui.ConsoleUiKamene;
+import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
 import sk.tuke.gamestudio.server.entity.Comment;
 import sk.tuke.gamestudio.server.entity.Rating;
 import sk.tuke.gamestudio.server.entity.Score;
@@ -15,31 +15,31 @@ import sk.tuke.gamestudio.server.service.ScoreException;
 import sk.tuke.gamestudio.server.service.ScoreServiceJDBC;
 
 public class Kamene {
-	private consoleui consoleui;
+	private ConsoleUiKamene consoleui;
 	private static Kamene instance;
 	private long startMillis = System.currentTimeMillis();
 
-	private Kamene() {
-		new Thread(() -> {
-			int i = 5;
-			while (i > 0) {
-				System.out.println(i);
-				try {
-					i--;
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// I don't think you need to do anything for your particular
-					// problem
-				}
-			}
-			instance = this;
-			this.consoleui = new consoleui();
-			Field field = consoleui.setDifficulty();
-			consoleui.newGameStarted(field);
-		}
-
-		).start();
-	}
+//	private Kamene() {
+//		new Thread(() -> {
+//			int i = 5;
+//			while (i > 0) {
+//				System.out.println(i);
+//				try {
+//					i--;
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// I don't think you need to do anything for your particular
+//					// problem
+//				}
+//			}
+//			instance = this;
+//			this.consoleui = new consoleui();
+//			Field field = consoleui.setDifficulty();
+//			consoleui.newGameStarted(field);
+//		}
+//
+//		).start();
+//	}
 
 	public static Kamene getInstance() {
 		if (instance == null) {

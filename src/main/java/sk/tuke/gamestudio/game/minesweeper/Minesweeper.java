@@ -1,17 +1,18 @@
 package sk.tuke.gamestudio.game.minesweeper;
 
-import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUI;
-import sk.tuke.gamestudio.game.minesweeper.core.Field;
+import sk.tuke.gamestudio.game.UserInterface;
+import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUiMinesweeper;
+import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
 
 /**
  * Main application class.
  */
-@ClassPreamble(author = "Daniel", date = "15.06.2017", reviewers = { "justMe" })
+
 public class Minesweeper {
     /** User interface. */
     private UserInterface userInterface;
     private long startMillis = System.currentTimeMillis(); 
-    private BestTimes bestTimes;
+    
     private static Minesweeper instance;
     private Settings setting;
     /**
@@ -21,7 +22,7 @@ public class Minesweeper {
     private Minesweeper() {
         instance=this;
     	
-        bestTimes=new BestTimes();
+        
         
 //        ConsoleUI.setDifficulty();
 //        Field field = new Field(setting.getRowCount(), setting.getColumnCount(), setting.getMineCount());
@@ -31,10 +32,9 @@ public class Minesweeper {
 //        setting.save();
         
     }
-  @FixMe(whatNeedsToBeDone = "nothing, its just exercise")
-    public BestTimes getBestTimes() {
-		return bestTimes;
-	}
+ 
+    
+	
     
   
 

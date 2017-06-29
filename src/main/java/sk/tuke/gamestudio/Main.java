@@ -9,23 +9,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUI;
-import sk.tuke.gamestudio.game.minesweeper.core.Field;
+import sk.tuke.gamestudio.server.service.CommentService;
+import sk.tuke.gamestudio.server.service.CommentServiceJDBC;
+import sk.tuke.gamestudio.server.service.RatingService;
+import sk.tuke.gamestudio.server.service.RatingServiceJDBC;
+//import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUI;
+//import sk.tuke.gamestudio.game.minesweeper.core.Field;
 import sk.tuke.gamestudio.server.service.ScoreService;
+import sk.tuke.gamestudio.server.service.ScoreServiceJDBC;
+import sk.tuke.gamestudio.game.kamene.consoleui.ConsoleUiKamene;
+import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
+import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUiMinesweeper;
+import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
 
 @Configuration
 @SpringBootApplication
 public class Main {
 
-	int a =2;
-	Scanner sc = new Scanner(System.in);
-
 	public static void main(String[] args) throws Exception {
-//		Formatter f = new Formatter();
-//		f.format("Pre vyber hry stlac pozadovane cislo:\n");
-//		f.format("1 Minesweeper\n");
-//		f.format("2. Kamene");
-//		System.out.println(f);
 		
 
 		SpringApplication.run(Main.class, args);
@@ -36,27 +37,55 @@ public class Main {
 	// public CommandLineRunner runner(ConsoleUI ui) { return args ->
 	// ui.newGameStarted(); }
 
-	public CommandLineRunner runner(ConsoleUI ui) {
+	public CommandLineRunner runner(GameStudioUI ui) {
 		return new CommandLineRunner() {
 
 			@Override
 			public void run(String... arg0) throws Exception {
-				
-				ui.newGameStarted();
-				}
 
-			
+				ui.play();
+			}
+
 		};
 	}
 
 	@Bean
-	public ConsoleUI consoleUI(Field field) {
-		return new ConsoleUI(field);
+	public GameStudioUI gameStudioUI() {
+		return new GameStudioUI();
 	}
 
 	@Bean
-	public Field field() {
-		return new Field(9, 9, 1);
+	public ConsoleUiKamene consoleUiKamene(FieldKamene field) {
+		return new ConsoleUiKamene(field);
+	}
+	@Bean
+	public ConsoleUiMinesweeper consoleUiMinesweeper(FieldMinesweeper field) {
+		return new ConsoleUiMinesweeper(field);
 	}
 
+	@Bean
+	public FieldKamene fieldKamene() {
+		return new FieldKamene(3, 3);
+
+	}
+
+	@Bean
+	public FieldMinesweeper fieldMinesweeper() {
+		return new FieldMinesweeper(9, 9, 1);
+	}
+
+	@Bean
+	public CommentService commentservice() {
+		return new CommentServiceJDBC();
+	}
+
+	@Bean
+	public RatingService ratingservice() {
+		return new RatingServiceJDBC();
+	}
+
+	@Bean
+	public ScoreService scoreservice() {
+		return new ScoreServiceJDBC();
+	}
 }

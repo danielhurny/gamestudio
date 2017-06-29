@@ -1,6 +1,6 @@
 package sk.tuke.gamestudio.game.kamene.core;
 
-public enum GameStatus {
+public enum GameState {
 /**
  * P
  */

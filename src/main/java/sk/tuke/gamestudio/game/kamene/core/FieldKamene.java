@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.Formatter;
 import java.util.Random;
 
-public class Field implements Serializable {
+import sk.tuke.gamestudio.game.GameState;
+
+public class FieldKamene implements Serializable {
 
 	private final Tile[][] tiles;
 
@@ -38,9 +40,15 @@ public class Field implements Serializable {
 		this.c = c;
 	}
 
-	private GameStatus status = GameStatus.PLAYING;
+	private GameState status = GameState.PLAYING;
+	
+	
 
-	public Field(int rowCount, int columnCount) {
+	public void setStatus(GameState status) {
+		this.status = status;
+	}
+
+	public FieldKamene(int rowCount, int columnCount) {
 		this.rowCount = rowCount;
 		this.columnCount = columnCount;
 		tiles = new Tile[rowCount][columnCount];
@@ -61,7 +69,7 @@ public class Field implements Serializable {
 		return columnCount;
 	}
 
-	public GameStatus getStatus() {
+	public GameState getStatus() {
 		return status;
 	}
 
@@ -90,7 +98,7 @@ public class Field implements Serializable {
 			setC(c += 1);
 		}
 		if (isSolved()) {
-			status = GameStatus.SOLVED;
+			status = GameState.SOLVED;
 			return;
 		}
 	}
@@ -125,7 +133,7 @@ public class Field implements Serializable {
 		for (int r = 0; r < rowCount; r++) {
 			for (int c = 0; c < columnCount; c++) {
 				if (tiles[r][c] == null) {
-					tiles[r][c] = new emptyTile(r, c);
+					tiles[r][c] = new EmptyTile(r, c);
 					setR(r);
 					setC(c);
 				}
@@ -159,11 +167,11 @@ public class Field implements Serializable {
 		}
 	}
 
-	public static Field load() {
-		Field s = null;
+	public static FieldKamene load() {
+		FieldKamene s = null;
 		try (FileInputStream fileIn = new FileInputStream(SETTING_FILE);
 				ObjectInputStream in = new ObjectInputStream(fileIn)) {
-			s = (Field) in.readObject();
+			s = (FieldKamene) in.readObject();
 		} catch (IOException e) {
 			System.out.println("Nepodarilo sa nacitat subor");
 
@@ -172,7 +180,7 @@ public class Field implements Serializable {
 			e.printStackTrace();
 		}
 		if (s == null) {
-			return new Field(4, 4);
+			return new FieldKamene(4, 4);
 		} else
 			return s;
 
