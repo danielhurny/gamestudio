@@ -12,12 +12,9 @@ import java.util.regex.Pattern;
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.UserInterface;
 import sk.tuke.gamestudio.game.WrongFormatException;
-import sk.tuke.gamestudio.game.kamene.Kamene;
 import sk.tuke.gamestudio.game.minesweeper.Minesweeper;
 import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
 import sk.tuke.gamestudio.server.entity.Score;
-import sk.tuke.gamestudio.server.service.ScoreException;
-import sk.tuke.gamestudio.server.service.ScoreServiceJDBC;
 
 /**
  * Console user interface.
@@ -25,10 +22,9 @@ import sk.tuke.gamestudio.server.service.ScoreServiceJDBC;
 public class ConsoleUiMinesweeper implements UserInterface {
 	/** Playing field. */
 	private FieldMinesweeper field;
-	private boolean actionPerformed = false;
+	// private boolean actionPerformed = false;
 	/** Input reader. */
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-	private ScoreServiceJDBC scoreservice = new ScoreServiceJDBC();
 
 	/**
 	 * Reads line of text from the reader.
@@ -98,40 +94,30 @@ public class ConsoleUiMinesweeper implements UserInterface {
 	 */
 	@Override
 	public Score newGameStarted() {
-        Score score=null;
+		Score score = null;
 		System.out.println("Vitaj " + System.getProperty("user.name"));
 
 		DateFormat df = new SimpleDateFormat("hh:mm dd.MM.YYYY");
 		System.out.println(df.format(new Date()));
 
-		this.field = field;
+		// this.field = field;
 		do {
 			update();
 			processInput();
 			if (field.getState() == GameState.SOLVED) {
 				System.out.println("Vyhrali ste!");
-				
-					score=new Score(System.getProperty("user.name"), "Minesweeper",
-							1000 - Minesweeper.getInstance().getPlayingSeconds(), getSQLCurrentDate());
-					
-				
+
+				score = new Score(System.getProperty("user.name"), "Minesweeper",
+						1000 - Minesweeper.getInstance().getPlayingSeconds(), getSQLCurrentDate());
 
 			} else if (field.getState() == GameState.FAILED) {
 				System.out.println("Prehrali ste!");
-				try {
-					for (Score s : scoreservice.getBestScores("Minesweeper"))
-						System.out.println(s);
-				} catch (ScoreException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-
-				}
-				break;}
+				break;
+			}
 		} while (field.getState() == GameState.PLAYING);
-	return score;
+		return score;
 	}
 
-	
 	@Override
 	public void update() {
 		System.out.println(field.toString());
@@ -183,9 +169,16 @@ public class ConsoleUiMinesweeper implements UserInterface {
 				throw new WrongFormatException("Zadan� zl� vstup");
 		} else
 			throw new WrongFormatException("Zadan� zl� vstup");
-		actionPerformed = true;
+		// actionPerformed = true;
 	}
+
 	private java.sql.Date getSQLCurrentDate() {
 		return new java.sql.Date(new Date().getTime());
+	}
+
+	@Override
+	public String getName() {
+
+		return "Minesweeper";
 	}
 }

@@ -6,16 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sk.tuke.gamestudio.game.Games;
+import sk.tuke.gamestudio.game.UserInterface;
 import sk.tuke.gamestudio.game.WrongFormatException;
-import sk.tuke.gamestudio.game.kamene.consoleui.ConsoleUiKamene;
-import sk.tuke.gamestudio.game.minesweeper.Minesweeper;
-import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUiMinesweeper;
 import sk.tuke.gamestudio.server.entity.Comment;
 import sk.tuke.gamestudio.server.entity.Rating;
 import sk.tuke.gamestudio.server.entity.Score;
@@ -27,7 +22,6 @@ import sk.tuke.gamestudio.server.service.ScoreException;
 import sk.tuke.gamestudio.server.service.ScoreService;
 
 public class GameStudioUI {
-	List<String> games = Stream.of(Games.values()).map(Enum::name).collect(Collectors.toList());
 
 	@Autowired
 	private ScoreService scoreservice;
@@ -36,9 +30,7 @@ public class GameStudioUI {
 	@Autowired
 	private RatingService ratingservice;
 	@Autowired
-	private ConsoleUiKamene consoleUiKamene;
-	@Autowired
-	private ConsoleUiMinesweeper consoleUiMinesweeper;
+	private List<UserInterface> games;
 
 	Scanner sc = new Scanner(System.in);
 
@@ -46,7 +38,14 @@ public class GameStudioUI {
 	Score gamescore;
 
 	public void play() {
+//		try {
+//			ratingservice.getAverageRating("Minesweeper");
+//		} catch (RatingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		processInput();
+		addScore(gamescore);
 		while (true) {
 			services();
 		}
@@ -57,7 +56,7 @@ public class GameStudioUI {
 		Formatter f = new Formatter();
 		f.format("Pre vyber hry stlac pozadovane cislo:\n");
 		for (int i = 0; i < games.size(); i++) {
-			f.format("%d " + games.get(i) + "\n", i + 1);
+			f.format("%d " + games.get(i).getName() + "\n", i + 1);
 		}
 		f.format("\npre koniec stlac 0");
 		System.out.println(f);
@@ -73,37 +72,29 @@ public class GameStudioUI {
 	}
 
 	private void handleInput(int input) throws WrongFormatException {
-
-		switch (input) {
-		case 0:
+		if (input > games.size()) {
+			processInput();
+		} else if (input == 0) {
 			System.out.println("Opustil si gamestudio");
 			System.exit(0);
-			break;
-		case 1:
-			gamePlayed += "Minesweeper";
-			gamescore = consoleUiMinesweeper.newGameStarted();
-			break;
-		case 2:
-			gamePlayed += "Kamene";
-			gamescore = consoleUiKamene.newGameStarted();
-			break;
-		default: processInput();	
 
+		} else {
+			gamescore = games.get(input - 1).newGameStarted();
+			gamePlayed += games.get(input - 1).getName();
 		}
 
 	}
 
 	private void services() {
 
-		addScore(gamescore);
 
 		System.out.println("Aku akciu chces vykonat?"
-				+ "pre vypis komentarov -c\n pre vypis ratingu -r\n pre vypis score -b\n pre pridanie komentara - m\n"
+				+ "\n pre vyber hry -vyber\n pre vypis komentarov -c\n pre vypis ratingu -r\n pre vypis score -b\n pre pridanie komentara - m\n"
 				+ " pre pridanie ratingu -rate\n pre zistenie ratingu od konkretneho hraca - player\n pre exit - exit");
 
 		String userInput = sc.nextLine().toLowerCase();
 
-		Pattern pattern = Pattern.compile("(exit|rate|player|c|b|r|m)");
+		Pattern pattern = Pattern.compile("(vyber|exit|rate|player|c|b|r|m)");
 		Matcher matcher = pattern.matcher(userInput);
 
 		if (matcher.matches()) {
@@ -122,7 +113,12 @@ public class GameStudioUI {
 
 				}
 
-			} else if (matcher.group(1).equals("rate")) {
+			}else if (matcher.group(1).equals("vyber")) {
+				gamePlayed="";
+				processInput();
+				
+
+			}  else if (matcher.group(1).equals("rate")) {
 				System.out.println("Zadaj rating:");
 				int rate = Integer.parseInt(sc.nextLine());
 				try {

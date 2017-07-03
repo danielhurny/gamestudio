@@ -41,8 +41,6 @@ public class FieldKamene implements Serializable {
 	}
 
 	private GameState status = GameState.PLAYING;
-	
-	
 
 	public void setStatus(GameState status) {
 		this.status = status;

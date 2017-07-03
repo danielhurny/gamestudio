@@ -1,7 +1,6 @@
 package sk.tuke.gamestudio.server.service;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +11,10 @@ import java.util.List;
 
 import sk.tuke.gamestudio.server.entity.Comment;
 
-
 public class CommentServiceJDBC implements CommentService {
-	
-	private DatabaseSettings ds=new DatabaseSettings();
 
+	DatabaseSettings ds = new DatabaseSettings();
+	
 	public static final String INSERT_QUERY = "INSERT INTO comment (player,game,comment,commentedon) "
 			+ "VALUES (?, ?,?,?)";
 	public static final String GET_COMMENT_QUERY = "SELECT player,game,comment,commentedon FROM comment WHERE game = ?";
@@ -24,8 +22,8 @@ public class CommentServiceJDBC implements CommentService {
 	@Override
 	public void addComment(Comment comment) throws CommentException {
 
-		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER, ds.PASSWORD);
-				PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
+		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER,
+				ds.PASSWORD); PreparedStatement stm = con.prepareStatement(INSERT_QUERY);) {
 			stm.setString(1, comment.getPlayer());
 			stm.setString(2, comment.getGame());
 			stm.setString(3, comment.getComment());
@@ -42,8 +40,8 @@ public class CommentServiceJDBC implements CommentService {
 	@Override
 	public List<Comment> getComments(String game) throws CommentException {
 		List<Comment> comments = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER, ds.PASSWORD);
-				PreparedStatement stm = con.prepareStatement(GET_COMMENT_QUERY);) {
+		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER,
+				ds.PASSWORD); PreparedStatement stm = con.prepareStatement(GET_COMMENT_QUERY);) {
 			stm.setString(1, game);
 			ResultSet rs = stm.executeQuery();
 

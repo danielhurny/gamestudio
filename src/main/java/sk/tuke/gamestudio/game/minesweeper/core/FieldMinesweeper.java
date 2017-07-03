@@ -1,10 +1,7 @@
 package sk.tuke.gamestudio.game.minesweeper.core;
 
-import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.minesweeper.core.Tile.State;

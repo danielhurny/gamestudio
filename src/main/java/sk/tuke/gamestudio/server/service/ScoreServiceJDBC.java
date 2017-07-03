@@ -1,13 +1,10 @@
 package sk.tuke.gamestudio.server.service;
 
 import java.sql.Connection;
-
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +13,10 @@ import java.util.List;
 import sk.tuke.gamestudio.server.entity.Score;
 
 public class ScoreServiceJDBC implements ScoreService {
+	
+	DatabaseSettings ds= new DatabaseSettings();
 
-	private DatabaseSettings ds=new DatabaseSettings();
+	
 	public static final String INSERT_QUERY = "INSERT INTO SCORE (player,game,points,playedon) " + "VALUES (?, ?,?,?)";
 	public static final String GET_BEST_SCORES = "SELECT player,game,points,playedon FROM score WHERE game = ?";
 

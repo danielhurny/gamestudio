@@ -1,16 +1,12 @@
 package sk.tuke.gamestudio.game.minesweeper;
 
-import sk.tuke.gamestudio.game.UserInterface;
-import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUiMinesweeper;
-import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
-
 /**
  * Main application class.
  */
 
 public class Minesweeper {
     /** User interface. */
-    private UserInterface userInterface;
+//    private UserInterface userInterface;
     private long startMillis = System.currentTimeMillis(); 
     
     private static Minesweeper instance;

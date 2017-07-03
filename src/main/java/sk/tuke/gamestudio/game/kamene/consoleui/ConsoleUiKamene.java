@@ -8,27 +8,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.UserInterface;
 import sk.tuke.gamestudio.game.WrongFormatException;
 import sk.tuke.gamestudio.game.kamene.Kamene;
 import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
 import sk.tuke.gamestudio.server.entity.Score;
-import sk.tuke.gamestudio.server.service.CommentService;
-import sk.tuke.gamestudio.server.service.RatingService;
-import sk.tuke.gamestudio.server.service.ScoreException;
-import sk.tuke.gamestudio.server.service.ScoreService;
 
 public class ConsoleUiKamene implements UserInterface {
 	private FieldKamene field;
-	@Autowired
-	private ScoreService scoreservice;
-	@Autowired
-	private CommentService commentservice;
-	@Autowired
-	private RatingService ratingservice;
+
 
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
@@ -47,14 +36,14 @@ public class ConsoleUiKamene implements UserInterface {
 
 	public Score newGameStarted() {
     Score score = null;
-		this.field = field;
+//		this.field = field;
 		do {
 			update();
 			processInput();
 			if (field.getStatus() == GameState.SOLVED) {
 				System.out.println("Vyhrali ste!");
 				score=new Score(System.getProperty("user.name"), "Kamene",
-							500 - Kamene.getInstance().getPlayingSeconds(), new Date());
+							500 - Kamene.getInstance().getPlayingSeconds(), getSQLCurrentDate());
 				
 				break;
 			}
@@ -116,6 +105,15 @@ public class ConsoleUiKamene implements UserInterface {
 			return FieldKamene.load();
 		}
 		return new FieldKamene(4, 4);
+	}
+	
+	private java.sql.Date getSQLCurrentDate() {
+		return new java.sql.Date(new Date().getTime());
+	}
+
+	@Override
+	public String getName() {
+		return "Kamene";
 	}
 
 }
