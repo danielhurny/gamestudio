@@ -34,7 +34,7 @@ public class RatingServiceSORM implements RatingService{
 	}
 
 	@Override
-	public int getAverageRating(String game) throws RatingException {
+	public double getAverageRating(String game) throws RatingException {
 		return new RatingServiceJDBC().getAverageRating(game);
 	}
 

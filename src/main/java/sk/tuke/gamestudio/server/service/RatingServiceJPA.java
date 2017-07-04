@@ -16,25 +16,25 @@ public class RatingServiceJPA implements RatingService {
 	@Override
 	public void setRating(Rating rating) throws RatingException {
 		try {
-			Rating r = (Rating)entityManager
+			Rating r = (Rating) entityManager
 					.createQuery("select r from Rating r where r.game = :game and r.player = :player")
-					.setParameter("game", rating.getGame()).setParameter("player", rating.getPlayer()).getSingleResult();
+					.setParameter("game", rating.getGame()).setParameter("player", rating.getPlayer())
+					.getSingleResult();
 			r.setRating(rating.getRating());
 		} catch (NoResultException e) {
 			entityManager.persist(rating);
 		}
-		
 
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public int getAverageRating(String game) throws RatingException {
+	public double getAverageRating(String game) throws RatingException {
 
 		Object o = entityManager.createQuery("select avg(r.rating) from Rating r where r.game = :game")
 				.setParameter("game", game).getSingleResult();
-		return o == null ? -1 : ((Double) o).intValue();
+		return o == null ? -1 : ((Double) o);
 	}
 
 	@Override

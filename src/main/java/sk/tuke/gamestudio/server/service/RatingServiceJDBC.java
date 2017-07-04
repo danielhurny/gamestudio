@@ -36,7 +36,7 @@ public class RatingServiceJDBC implements RatingService {
 	}
 
 	@Override
-	public int getAverageRating(String game) throws RatingException {
+	public double getAverageRating(String game) throws RatingException {
 		int rating = 0;
 		try (Connection con = DriverManager.getConnection(ds.URL, ds.USER,
 				ds.PASSWORD); PreparedStatement stm = con.prepareStatement(GET_AVERAGE_RATING);) {

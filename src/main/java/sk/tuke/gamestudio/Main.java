@@ -13,10 +13,13 @@ import sk.tuke.gamestudio.game.UserInterface;
 import sk.tuke.gamestudio.game.kamene.consoleui.ConsoleUiKamene;
 import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
 import sk.tuke.gamestudio.game.minesweeper.consoleui.ConsoleUiMinesweeper;
+import sk.tuke.gamestudio.game.minesweeper.consoleui.ReplayConsoleUI;
 import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
 import sk.tuke.gamestudio.server.service.CommentService;
 import sk.tuke.gamestudio.server.service.CommentServiceJPA;
 import sk.tuke.gamestudio.server.service.CommentServiceSORM;
+import sk.tuke.gamestudio.server.service.GamePlayService;
+import sk.tuke.gamestudio.server.service.GamePlayServiceJPA;
 import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.RatingServiceJPA;
 import sk.tuke.gamestudio.server.service.RatingServiceSORM;
@@ -35,16 +38,31 @@ public class Main {
 
 	}
 
+//	@Bean
+//	
+//
+//	public CommandLineRunner runner(GameStudioUI ui) {
+//		return new CommandLineRunner() {
+//
+//			@Override
+//			public void run(String... arg0) throws Exception {
+//
+//				ui.play();
+//			}
+//
+//		};
+//	}
+	
 	@Bean
 	
 
-	public CommandLineRunner runner(GameStudioUI ui) {
+	public CommandLineRunner runner(ReplayConsoleUI ui) {
 		return new CommandLineRunner() {
 
 			@Override
 			public void run(String... arg0) throws Exception {
 
-				ui.play();
+				ui.play(614);
 			}
 
 		};
@@ -72,7 +90,7 @@ public class Main {
 
 	@Bean
 	public FieldMinesweeper fieldMinesweeper() {
-		return new FieldMinesweeper(9, 9, 1);
+		return new FieldMinesweeper(9, 9, 2);
 	}
 
 	@Bean
@@ -104,4 +122,13 @@ public class Main {
 		}
 		return games;
 	}
-}
+	
+	@Bean 
+	public GamePlayService gamePlayService(){
+		return new GamePlayServiceJPA();
+	}
+	
+	@Bean
+	public ReplayConsoleUI replayConsoleUI() {
+		return new ReplayConsoleUI();
+}}

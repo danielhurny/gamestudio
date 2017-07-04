@@ -5,11 +5,13 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 import sk.tuke.gamestudio.sorm.Column;
 import sk.tuke.gamestudio.sorm.Table;
 @Table(name="score")
 @Entity
+@NamedQuery(name = "Score.selectScore", query ="select s from Score s where s.game = :game")
 public class Score {
 	@Column(name="id",isPrimaryKey=true)
 	@Id

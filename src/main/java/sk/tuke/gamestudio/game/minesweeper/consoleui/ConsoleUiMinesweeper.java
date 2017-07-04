@@ -9,12 +9,16 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.UserInterface;
 import sk.tuke.gamestudio.game.WrongFormatException;
 import sk.tuke.gamestudio.game.minesweeper.Minesweeper;
 import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
+import sk.tuke.gamestudio.game.minesweeper.entity.GamePlay;
 import sk.tuke.gamestudio.server.entity.Score;
+import sk.tuke.gamestudio.server.service.GamePlayService;
 
 /**
  * Console user interface.
@@ -26,6 +30,9 @@ public class ConsoleUiMinesweeper implements UserInterface {
 	/** Input reader. */
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
+	@Autowired
+	private GamePlayService gamePlayService;
+	
 	/**
 	 * Reads line of text from the reader.
 	 * 
@@ -115,7 +122,16 @@ public class ConsoleUiMinesweeper implements UserInterface {
 				break;
 			}
 		} while (field.getState() == GameState.PLAYING);
+		
+		//save gameplay
+				GamePlay gamePlay = field.getGamePlay();
+				if(gamePlay!=null){
+				gamePlayService.save(gamePlay);	
+				}
+		
 		return score;
+		
+		
 	}
 
 	@Override

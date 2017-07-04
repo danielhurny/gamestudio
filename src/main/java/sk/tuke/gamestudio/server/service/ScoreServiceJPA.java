@@ -23,7 +23,11 @@ public class ScoreServiceJPA implements ScoreService{
 	@Override
 	public List<Score> getBestScores(String game) throws ScoreException {
 		// TODO Auto-generated method stub
-		return entityManager.createQuery("select s from Score s where s.game = :game")
+//		return entityManager.createQuery("select s from Score s where s.game = :game")
+//				.setParameter("game", game)
+//				.getResultList();
+		
+		return entityManager.createNamedQuery("Score.selectScore")
 				.setParameter("game", game)
 				.getResultList();
 	}

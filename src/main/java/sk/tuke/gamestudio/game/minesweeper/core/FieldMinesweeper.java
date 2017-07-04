@@ -1,11 +1,16 @@
 package sk.tuke.gamestudio.game.minesweeper.core;
 
 import java.util.Formatter;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.minesweeper.core.Tile.State;
-
+import sk.tuke.gamestudio.game.minesweeper.entity.Command;
+import sk.tuke.gamestudio.game.minesweeper.entity.CommandType;
+import sk.tuke.gamestudio.game.minesweeper.entity.GamePlay;
+import sk.tuke.gamestudio.game.minesweeper.entity.MineCoordinate;
 
 /**
  * Field represents playing field and game logic.
@@ -36,10 +41,11 @@ public class FieldMinesweeper {
 	 */
 	private GameState state = GameState.PLAYING;
 
-//	@Autowired
-//	private ScoreService scoreService;
-	
-	
+	private GamePlay gamePlay;
+
+	// @Autowired
+	// private ScoreService scoreService;
+
 	/**
 	 * Constructor.
 	 *
@@ -57,8 +63,23 @@ public class FieldMinesweeper {
 		tiles = new Tile[rowCount][columnCount];
 
 		// generate the field content
+		gamePlay = new GamePlay();
+		gamePlay.setRowCount(rowCount);
+		gamePlay.setColumnCount(columnCount);
 		generate();
-		
+
+	}
+
+	public FieldMinesweeper(int rowCount, int columnCount, Set<MineCoordinate> mineCoordinates) {
+		this.rowCount = rowCount;
+		this.columnCount = columnCount;
+		this.mineCount = mineCoordinates.size();
+		tiles = new Tile[rowCount][columnCount];
+
+		// generate the field content
+
+		regenerate(mineCoordinates);
+
 	}
 
 	/**
@@ -68,13 +89,24 @@ public class FieldMinesweeper {
 	 *            row number
 	 * @param column
 	 *            column number
+	 * 
+	 * 
+	 * 
 	 */
+
 	public void openTile(int row, int column) {
-		
-		
+
+		if (gamePlay != null) {
+			gamePlay.addCommand(new Command(CommandType.OPEN, row, column));
+		}
+		openTileRec(row, column);
+	}
+
+	public void openTileRec(int row, int column) {
 
 		Tile tile = tiles[row][column];
 		if (tile.getState() == Tile.State.CLOSED) {
+
 			tile.setState(Tile.State.OPEN);
 			if (tile instanceof Mine) {
 				state = GameState.FAILED;
@@ -123,6 +155,10 @@ public class FieldMinesweeper {
 	 */
 	public void markTile(int row, int column) {
 		{
+			if (gamePlay != null) {
+				gamePlay.addCommand(new Command(CommandType.MARK, row, column));
+			}
+
 			Tile tile = tiles[row][column];
 			if (tile.getState() == Tile.State.CLOSED) {
 				tile.setState(Tile.State.MARKED);
@@ -139,20 +175,40 @@ public class FieldMinesweeper {
 	private void generate() {
 		Random r = new Random();
 		int i = 0;
+		Set<MineCoordinate> coordinates = new HashSet<>();
 		while (i < mineCount) {
 			int a = r.nextInt(rowCount);
 			int b = r.nextInt(columnCount);
 			if (tiles[a][b] == null) {
 				tiles[a][b] = new Mine();
 				i++;
+				coordinates.add(new MineCoordinate(a, b));
 			}
 		}
+		setClueTiles();
+		gamePlay.setMineCoordinates(coordinates);
+	}
+
+	private void setClueTiles() {
 		for (int k = 0; k < rowCount; k++) {
 			for (int j = 0; j < columnCount; j++) {
 				if (tiles[k][j] == null) {
 					tiles[k][j] = new Clue(countAdjacentMines(k, j));
 				}
 			}
+		}
+	}
+
+	private void regenerate(Set<MineCoordinate> mineCoordinates) {
+		setMines(mineCoordinates);
+
+		setClueTiles();
+
+	}
+
+	private void setMines(Set<MineCoordinate> mineCoordinates) {
+		for (MineCoordinate mineCoordinate : mineCoordinates) {
+			tiles[mineCoordinate.getRow()][mineCoordinate.getColumn()] = new Mine();
 		}
 	}
 
@@ -215,7 +271,7 @@ public class FieldMinesweeper {
 				for (int columnOffset = -1; columnOffset <= 1; columnOffset++) {
 					int actColumn = column + columnOffset;
 					if (actColumn >= 0 && actColumn < columnCount) {
-						openTile(actRow, actColumn);
+						openTileRec(actRow, actColumn);
 					}
 				}
 			}
@@ -247,6 +303,10 @@ public class FieldMinesweeper {
 
 		}
 		return field.toString();
+	}
+
+	public GamePlay getGamePlay() {
+		return gamePlay;
 	}
 
 }
