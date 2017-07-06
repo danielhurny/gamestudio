@@ -7,7 +7,7 @@ public class Tile {
 	}
 	
 	private State state = State.CLOSED;
-	private Integer value;
+	private int value;
 	
 	public Tile(int value) {
 		super();
@@ -34,7 +34,7 @@ public class Tile {
 	public String toString() {
 		if(state==State.CLOSED){
 			return "X";
-		}else return value.toString();
+		}else return String.valueOf(value);
 		
 	}
 	

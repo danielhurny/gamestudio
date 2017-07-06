@@ -1,10 +1,13 @@
-package sk.tuke.gamestudio.server.service;
+package sk.tuke.gamestudio.server.service.serviceSORM;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 
 import sk.tuke.gamestudio.server.entity.Score;
+import sk.tuke.gamestudio.server.service.DatabaseSettings;
+import sk.tuke.gamestudio.server.service.ScoreException;
+import sk.tuke.gamestudio.server.service.ScoreService;
 import sk.tuke.gamestudio.sorm.SORM;
 
 public class ScoreServiceSORM implements ScoreService {

@@ -1,10 +1,13 @@
-package sk.tuke.gamestudio.server.service;
+package sk.tuke.gamestudio.server.service.serviceSORM;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 
 import sk.tuke.gamestudio.server.entity.Comment;
+import sk.tuke.gamestudio.server.service.CommentException;
+import sk.tuke.gamestudio.server.service.CommentService;
+import sk.tuke.gamestudio.server.service.DatabaseSettings;
 import sk.tuke.gamestudio.sorm.SORM;
 
 public class CommentServiceSORM implements CommentService{

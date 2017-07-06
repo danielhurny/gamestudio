@@ -1,4 +1,4 @@
-package sk.tuke.gamestudio.server.service;
+package sk.tuke.gamestudio.server.service.serviceJPA;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -6,6 +6,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import sk.tuke.gamestudio.server.entity.Rating;
+import sk.tuke.gamestudio.server.service.RatingException;
+import sk.tuke.gamestudio.server.service.RatingService;
 
 @Transactional
 public class RatingServiceJPA implements RatingService {
