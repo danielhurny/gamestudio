@@ -35,12 +35,12 @@ public class RatingRestService {
 	@Path("/{game}/{player}")
 	@Produces("application/json")
 	public int getRating(@PathParam("game") String game,@PathParam("player") String player) throws RatingException{
-		return ratingService.getRating(game, player);
+		return ratingService.getRating(game.toLowerCase(), player);
 	}
 	@GET
 	@Path("/{game}")
 	@Produces("application/json")
 	public double getAverageRating(@PathParam("game") String game) throws RatingException{
-		return ratingService.getAverageRating(game);}
+		return ratingService.getAverageRating(game.toLowerCase());}
 
 }

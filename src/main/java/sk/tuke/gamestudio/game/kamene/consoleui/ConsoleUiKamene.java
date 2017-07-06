@@ -42,7 +42,7 @@ public class ConsoleUiKamene implements UserInterface {
 			processInput();
 			if (field.getStatus() == GameState.SOLVED) {
 				System.out.println("Vyhrali ste!");
-				score=new Score(System.getProperty("user.name"), "Kamene",
+				score=new Score(System.getProperty("user.name"), "kamene",
 							500 - Kamene.getInstance().getPlayingSeconds(), getSQLCurrentDate());
 				
 				break;
@@ -113,7 +113,7 @@ public class ConsoleUiKamene implements UserInterface {
 
 	@Override
 	public String getName() {
-		return "Kamene";
+		return "kamene";
 	}
 
 }

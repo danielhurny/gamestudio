@@ -64,7 +64,10 @@ public class FieldPexeso {
 	}
 
 	public void openTile(int row, int column) {
+		
 		Tile tile = tiles[row][column];
+		if(tile.getState()==State.OPENED||tile.getState()==State.CHOSEN){return;
+		}
 		switch (numberOfChosen) {
 		case 0:
 			tile.setState(State.CHOSEN);

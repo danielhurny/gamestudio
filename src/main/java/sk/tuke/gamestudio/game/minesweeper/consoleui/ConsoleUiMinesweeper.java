@@ -114,7 +114,7 @@ public class ConsoleUiMinesweeper implements UserInterface {
 			if (field.getState() == GameState.SOLVED) {
 				System.out.println("Vyhrali ste!");
 
-				score = new Score(System.getProperty("user.name"), "Minesweeper",
+				score = new Score(System.getProperty("user.name"), "minesweeper",
 						1000 - Minesweeper.getInstance().getPlayingSeconds(), getSQLCurrentDate());
 
 			} else if (field.getState() == GameState.FAILED) {
@@ -195,6 +195,6 @@ public class ConsoleUiMinesweeper implements UserInterface {
 	@Override
 	public String getName() {
 
-		return "Minesweeper";
+		return "minesweeper";
 	}
 }

@@ -33,7 +33,7 @@ public class CommentRestService {
 	@Path("/{game}")
 	@Produces("application/json")
 	public List<Comment> getComment(@PathParam("game") String game) throws CommentException{
-		return commentService.getComments(game);
+		return commentService.getComments(game.toLowerCase());
 	}
 	
 

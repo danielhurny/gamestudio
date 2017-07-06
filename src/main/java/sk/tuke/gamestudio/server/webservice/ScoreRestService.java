@@ -34,7 +34,7 @@ public class ScoreRestService {
 	@Path("/{game}")
 	@Produces("application/json")
 	public List<Score> getScores(@PathParam("game") String game) throws ScoreException{
-		return scoreService.getBestScores(game);
+		return scoreService.getBestScores(game.toLowerCase());
 	}
 
 }
