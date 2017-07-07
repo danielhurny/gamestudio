@@ -23,6 +23,8 @@ public class FieldKamene implements Serializable {
 
 	private int r; // suradnice empty tily
 	private int c;
+	private int rowEmpty;
+	private int columnEmpty;
 
 	public int getR() {
 		return r;
@@ -184,4 +186,53 @@ public class FieldKamene implements Serializable {
 
 	}
 
+	public void move(int value) {
+
+		int rowClicked = 0;
+		int columnClicked = 0;
+		int rowEmpty = 0;
+		int columnEmpty = 0;
+		for (int r = 0; r < getRowCount(); r++) {
+			for (int c = 0; c < getColumnCount(); c++) {
+				if (tiles[r][c].getValue() == value) {
+					rowClicked = r;
+					columnClicked = c;
+				}
+				if (tiles[r][c].getValue() == 0) {
+					rowEmpty = r;
+					columnEmpty = c;
+				}
+			}
+
+		}
+		if (possibleToMove(rowClicked, columnClicked)) {
+			Tile swap = tiles[rowClicked][columnClicked];
+			System.out.println("Swap tile:" + swap.getValue());
+			tiles[rowClicked][columnClicked] = tiles[rowEmpty][columnEmpty];
+			tiles[rowEmpty][columnEmpty] = swap;
+		}
+
+	}
+
+	private boolean possibleToMove(int row, int column) {
+
+		emptyTilePosition();
+		if ((rowEmpty == row && (columnEmpty == column - 1 || columnEmpty == column + 1))
+				|| columnEmpty == column && (rowEmpty == row - 1 || rowEmpty == row + 1)) {
+			return true;
+		}
+		return false;
+	}
+
+	private void emptyTilePosition() {
+		for (int r = 0; r < getRowCount(); r++) {
+			for (int c = 0; c < getColumnCount(); c++) {
+				if (tiles[r][c].getValue() == 0) {
+					this.rowEmpty = r;
+					this.columnEmpty = c;
+				}
+
+			}
+		}
+	}
 }

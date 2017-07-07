@@ -15,6 +15,14 @@ public class FieldPexeso {
 	private Tile secondChosen;
 	private int numberOfOpened=0;
 	private int numberOfChosen=0;
+	
+	public FieldPexeso(int rowCount, int columnCount) {
+		super();
+		this.rowCount = rowCount;
+		this.columnCount = columnCount;
+		this.tiles = new Tile[rowCount][columnCount];
+		generate();
+	}
 
 	public int getRowCount() {
 		return rowCount;
@@ -50,7 +58,7 @@ public class FieldPexeso {
 
 	public void generate() {
 		Random random = new Random();
-		for (int i = 0; i < rowCount * columnCount; i++) {
+		for (int i = 1; i <= (rowCount * columnCount) / 2; i++) {
 			int isTwice = 0;
 			while (isTwice <= 1) {
 				int randomRow = random.nextInt(rowCount);
@@ -61,18 +69,21 @@ public class FieldPexeso {
 				}
 			}
 		}
+
 	}
 
 	public void openTile(int row, int column) {
-		
+
 		Tile tile = tiles[row][column];
-		if(tile.getState()==State.OPENED||tile.getState()==State.CHOSEN){return;
+		if (tile.getState() == State.OPENED) {
+			return;
 		}
 		switch (numberOfChosen) {
 		case 0:
 			tile.setState(State.CHOSEN);
 			firstChosen = tile;
 			numberOfChosen++;
+			System.out.println("state 0");
 			break;
 		case 1:
 			tile.setState(State.CHOSEN);
@@ -82,18 +93,25 @@ public class FieldPexeso {
 			if (firstChosen.getValue() == secondChosen.getValue()) {
 				firstChosen.setState(State.OPENED);
 				secondChosen.setState(State.OPENED);
-				if (numberOfOpened==rowCount*columnCount) {
+				numberOfOpened+=2;
+				if (numberOfOpened == rowCount * columnCount) {
 					gameState = GameState.SOLVED;
+				} else {
+
 				}
 			}
+			System.out.println("state 1");
 			break;
 		case 2:
-			firstChosen.setState(State.CLOSED);
-			secondChosen.setState(State.CLOSED);
+			if (firstChosen.getState() == State.CHOSEN) {
+				firstChosen.setState(State.CLOSED);
+				secondChosen.setState(State.CLOSED);
+			}
 			tile.setState(State.CHOSEN);
-			numberOfChosen=1;
+			numberOfChosen = 1;
 			firstChosen = tile;
 			secondChosen = null;
+			System.out.println("state 2");
 		}
 
 	};

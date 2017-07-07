@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Minesweeper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+
+	<h1>Minesweeper</h1>
+
+	<p th:utext='${minesController.renderField()}' />
+	<a href="?command=new">New</a>
+	<a href="?command=mark"><span
+		th:text='${minesController.marking ? "Open" : "Mark"}' /></a>
+
+	<div th:text='${minesController.message}' />
+	<ol>
+		<li th:each="score:${scores}">
+		<span th:text="${score.player}" />
+		<span th:text="${score.points}" />
+		</li>
+	</ol>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ public class EmptyTile extends Tile implements Serializable {
 
 	private int k;
 	private int j;
-	private int value = 999999999;
+	private int value = 0;
 
 	private final String mark = "-";
 

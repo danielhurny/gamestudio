@@ -95,11 +95,12 @@ public class FieldMinesweeper {
 	 */
 
 	public void openTile(int row, int column) {
-
-		if (gamePlay != null) {
-			gamePlay.addCommand(new Command(CommandType.OPEN, row, column));
+		if (state == GameState.PLAYING) {
+			if (gamePlay != null) {
+				gamePlay.addCommand(new Command(CommandType.OPEN, row, column));
+			}
+			openTileRec(row, column);
 		}
-		openTileRec(row, column);
 	}
 
 	public void openTileRec(int row, int column) {
@@ -154,17 +155,19 @@ public class FieldMinesweeper {
 	 *            column number
 	 */
 	public void markTile(int row, int column) {
-		{
-			if (gamePlay != null) {
-				gamePlay.addCommand(new Command(CommandType.MARK, row, column));
-			}
+		if (state == GameState.PLAYING) {
+			{
+				if (gamePlay != null) {
+					gamePlay.addCommand(new Command(CommandType.MARK, row, column));
+				}
 
-			Tile tile = tiles[row][column];
-			if (tile.getState() == Tile.State.CLOSED) {
-				tile.setState(Tile.State.MARKED);
+				Tile tile = tiles[row][column];
+				if (tile.getState() == Tile.State.CLOSED) {
+					tile.setState(Tile.State.MARKED);
 
-			} else if (tile.getState() == Tile.State.MARKED) {
-				tile.setState(Tile.State.CLOSED);
+				} else if (tile.getState() == Tile.State.MARKED) {
+					tile.setState(Tile.State.CLOSED);
+				}
 			}
 		}
 	}
