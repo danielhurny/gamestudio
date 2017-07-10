@@ -29,13 +29,17 @@ public class GameStudioUI {
 	private CommentService commentservice;
 	@Autowired
 	private RatingService ratingservice;
-	@Autowired
-	private List<UserInterface> games;
+	
+	private UserInterface[] games;
 
 	Scanner sc = new Scanner(System.in);
 
 	String gamePlayed = "";
 	Score gamescore;
+
+	public GameStudioUI(UserInterface[] games) {
+		this.games = games;
+	}
 
 	public void play() {
 //		try {
@@ -55,8 +59,8 @@ public class GameStudioUI {
 	private void processInput() {
 		Formatter f = new Formatter();
 		f.format("Pre vyber hry stlac pozadovane cislo:\n");
-		for (int i = 0; i < games.size(); i++) {
-			f.format("%d " + games.get(i).getName() + "\n", i + 1);
+		for (int i = 0; i < games.length; i++) {
+			f.format("%d " + games[i].getName() + "\n", i + 1);
 		}
 		f.format("\npre koniec stlac 0");
 		System.out.println(f);
@@ -72,15 +76,15 @@ public class GameStudioUI {
 	}
 
 	private void handleInput(int input) throws WrongFormatException {
-		if (input > games.size()) {
+		if (input > games.length) {
 			processInput();
 		} else if (input == 0) {
 			System.out.println("Opustil si gamestudio");
 			System.exit(0);
 
 		} else {
-			gamescore = games.get(input - 1).newGameStarted();
-			gamePlayed += games.get(input - 1).getName();
+			gamescore = games[input - 1].newGameStarted();
+			gamePlayed += games[input - 1].getName();
 		}
 
 	}

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:fragment="footer_bar">
+
+		<p>Score:
+		<ol>
+			<li th:each="score:${scores}"><span th:text="${score.player}" />
+				<span th:text="${score.points}" /></li>
+		</ol>
+		</p>
+
+		<p>Comments:
+		<ol>
+			<li th:each="comment:${comments}"><span
+				th:text="${comment.player}" />
+				<span th:text="${comment.date}" />
+				<span th:text="${comment.comment}" /></li>
+			
+		</ol>
+		</p>
+		
+		
+
+		
+		
+</div>
+
+</body>
+</html>

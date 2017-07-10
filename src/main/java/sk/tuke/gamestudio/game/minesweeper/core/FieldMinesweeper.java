@@ -42,6 +42,8 @@ public class FieldMinesweeper {
 	private GameState state = GameState.PLAYING;
 
 	private GamePlay gamePlay;
+	
+	private long startMillis = startMillis = System.currentTimeMillis();
 
 	// @Autowired
 	// private ScoreService scoreService;
@@ -310,6 +312,14 @@ public class FieldMinesweeper {
 
 	public GamePlay getGamePlay() {
 		return gamePlay;
+	}
+	
+	public int getScore(){
+		return this.columnCount*this.rowCount*4-getPlayingTime();
+	}
+
+	public int getPlayingTime() {
+		return (int) ((System.currentTimeMillis() - startMillis) / 1000);
 	}
 
 }

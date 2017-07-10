@@ -6,21 +6,24 @@
 <link rel="stylesheet" href="/css/stylesheet.css" />
 </head>
 <body>
+	<div th:replace="header::login_bar" />
+	<div class="center">
+		<h1 class="center">Minesweeper</h1>
 
-	<h1>Minesweeper</h1>
+		<p class="center" th:utext='${minesController.renderField()}' />
+		<a href="?command=new">New</a> <a href="?command=mark"><span
+			th:text='${minesController.marking ? "Open" : "Mark"}' /></a>
 
-	<p th:utext='${minesController.renderField()}' />
-	<a href="?command=new">New</a>
-	<a href="?command=mark"><span
-		th:text='${minesController.marking ? "Open" : "Mark"}' /></a>
-
-	<div th:text='${minesController.message}' />
-	<ol>
-		<li th:each="score:${scores}">
-		<span th:text="${score.player}" />
-		<span th:text="${score.points}" />
-		</li>
-	</ol>
-
+		<div th:text='${minesController.message}' />
+		<ol>
+			<li th:each="score:${scores}"><span th:text="${score.player}" />
+				<span th:text="${score.points}" /></li>
+		</ol>
+		Hraci cas:
+		<div th:text='${minesController.getPlayingSeconds()}' />
+		
+		<div th:replace="footer::footer_bar" />
+		
+	</div>
 </body>
 </html>

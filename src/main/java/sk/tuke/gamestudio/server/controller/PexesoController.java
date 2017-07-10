@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import sk.tuke.gamestudio.game.GameState;
-import sk.tuke.gamestudio.game.minesweeper.core.Clue;
-import sk.tuke.gamestudio.game.minesweeper.core.FieldMinesweeper;
-import sk.tuke.gamestudio.game.minesweeper.core.Tile;
+import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
+import sk.tuke.gamestudio.game.pexeso.core.FieldPexeso;
+import sk.tuke.gamestudio.game.pexeso.core.Tile;
+import sk.tuke.gamestudio.game.pexeso.core.Tile.State;
 import sk.tuke.gamestudio.server.entity.Score;
 import sk.tuke.gamestudio.server.service.CommentService;
 import sk.tuke.gamestudio.server.service.RatingService;
@@ -23,11 +24,8 @@ import sk.tuke.gamestudio.server.service.ScoreService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
-
-public class MinesController {
-	private FieldMinesweeper field = new FieldMinesweeper(9, 9, 1);
-
-	private boolean marking;
+public class PexesoController {
+	private FieldPexeso field = new FieldPexeso(4, 4);
 
 	@Autowired
 	private ScoreService scoreService;
@@ -35,76 +33,69 @@ public class MinesController {
 	private CommentService commentService;
 	@Autowired
 	private RatingService ratingService;
+
 	@Autowired
 	private UserController userController;
 
 	private String message;
 
-	@RequestMapping("/mines")
-	public String mines(@RequestParam(name = "command", required = false) String command,
+	@RequestMapping("/pexeso")
+	public String pexeso(@RequestParam(name = "command", required = false) String command,
 			@RequestParam(name = "row", required = false) String row,
 			@RequestParam(name = "column", required = false) String column, Model model) {
 
-		message = "";
-
 		if (command != null) {
-			if ("mark".equals(command)) {
-				marking = !marking;
-			} else if ("new".equals(command)) {
-				field = new FieldMinesweeper(9, 9, 1);
-
+			if ("new".equals(command)) {
+				field = new FieldPexeso(4, 4);
 			}
 		} else {
 
+			// field.switchTile("a");
 			try {
 				int rowInt = Integer.parseInt(row);
 				int columnInt = Integer.parseInt(column);
-				if (marking) {
-					field.markTile(rowInt, columnInt);
-				} else {
-					field.openTile(rowInt, columnInt);
-				}
+
+				field.openTile(rowInt, columnInt);
+				;
+
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			if (field.getState() != GameState.PLAYING) {
-
-				if (field.getState() == GameState.FAILED) {
-					message = "You failed!";
-				} else {
-					message = "You won!";
-					field = new FieldMinesweeper(9, 9, 1);
-					if (userController.isLogged()) {
-						try {
-							scoreService.addScore(new Score(userController.getLoggedUser().getUsername(), "minesweeper",
-									field.getScore(), new Date()));
-						} catch (ScoreException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+			if (field.getGameState() == GameState.SOLVED) {
+				message = "You won!";
+				field = new FieldPexeso(4, 4);
+				if (userController.isLogged()) {
+					try {
+						scoreService.addScore(new Score(userController.getLoggedUser().getUsername(), "pexeso",
+								field.getScore(), new Date()));
+					} catch (ScoreException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
-			}
 
-		}
-		model.addAttribute("minesController", this);
+			}}
+		model.addAttribute("pexesoController", this);
 		try {
-			model.addAttribute("scores", scoreService.getBestScores("minesweeper"));
-			model.addAttribute("comments", commentService.getComments("minesweeper"));
+			model.addAttribute("scores", scoreService.getBestScores("pexeso"));
+			model.addAttribute("comments", commentService.getComments("pexeso"));
 			model.addAttribute("ratings", ratingService.getRating("minesweeper","ja"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "mines";
+
+		return "pexeso";
+
 	}
 
 	public String renderField() {
+
 		Formatter fr = new Formatter();
 
-		fr.format("<table>\n");
+		fr.format("<table class='pexeso'>\n");
 
 		for (int r = 0; r < field.getRowCount(); r++) {
 			fr.format("<tr>\n");
@@ -114,21 +105,20 @@ public class MinesController {
 				String image = getImageName(tile);
 				// "%3s", field.getTile(r, c)
 				fr.format("<a href='?row=%d&column=%d'>", r, c);
-				fr.format("<img src ='/images/mines/%s.png'>", image);
+				// fr.format("<a href='?%d'>", tile.getValue());
+				// fr.format(getImageName(tile));
+				fr.format("<img src ='/images/stones/%ska.png'>", image);
 				fr.format("</a>");
 				fr.format("</td>");
 			}
 			fr.format("</tr>\n");
 
 		}
+
 		fr.format("</table>\n");
 
 		return fr.toString();
 
-	}
-
-	public boolean isMarking() {
-		return marking;
 	}
 
 	public String getMessage() {
@@ -136,21 +126,11 @@ public class MinesController {
 	}
 
 	private String getImageName(Tile tile) {
-		String image = null;
-		switch (tile.getState()) {
-		case CLOSED:
-			return "closed";
-		case MARKED:
-			return "marked";
-		case OPEN:
-			if (tile instanceof Clue)
-				return "open" + ((Clue) tile).getValue();
-			else
-				return "mine";
+		if (tile.getState() == State.CLOSED) {
+			return "0";
 		}
-		return null;
+		return String.valueOf(tile.getValue());
 	}
-
 	public String getPlayingSeconds() {
 		return String.valueOf(field.getPlayingTime());
 	}

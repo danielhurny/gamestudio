@@ -13,9 +13,10 @@ public class FieldPexeso {
 	private GameState gameState = GameState.PLAYING;
 	private Tile firstChosen;
 	private Tile secondChosen;
-	private int numberOfOpened=0;
-	private int numberOfChosen=0;
-	
+	private int numberOfOpened = 0;
+	private int numberOfChosen = 0;
+	private long startMillis = startMillis = System.currentTimeMillis();
+
 	public FieldPexeso(int rowCount, int columnCount) {
 		super();
 		this.rowCount = rowCount;
@@ -40,8 +41,8 @@ public class FieldPexeso {
 		this.columnCount = columnCount;
 	}
 
-	public Tile[][] getTiles() {
-		return tiles;
+	public Tile getTile(int row, int column) {
+		return tiles[row][column];
 	}
 
 	public void setTiles(Tile[][] tiles) {
@@ -83,7 +84,6 @@ public class FieldPexeso {
 			tile.setState(State.CHOSEN);
 			firstChosen = tile;
 			numberOfChosen++;
-			System.out.println("state 0");
 			break;
 		case 1:
 			tile.setState(State.CHOSEN);
@@ -93,14 +93,14 @@ public class FieldPexeso {
 			if (firstChosen.getValue() == secondChosen.getValue()) {
 				firstChosen.setState(State.OPENED);
 				secondChosen.setState(State.OPENED);
-				numberOfOpened+=2;
+				numberOfOpened += 2;
 				if (numberOfOpened == rowCount * columnCount) {
 					gameState = GameState.SOLVED;
 				} else {
 
 				}
 			}
-			System.out.println("state 1");
+
 			break;
 		case 2:
 			if (firstChosen.getState() == State.CHOSEN) {
@@ -111,27 +111,34 @@ public class FieldPexeso {
 			numberOfChosen = 1;
 			firstChosen = tile;
 			secondChosen = null;
-			System.out.println("state 2");
 		}
-
 	};
 
-//	private boolean isSolved() {
-//		return ((getRowCount() * getColumnCount()) - getNumberOf(State.OPENED) == 0);
-//	}
-//
-//	private int getNumberOf(Tile.State state) {
-//		int number = 0;
-//		for (int j = 0; j < getRowCount(); j++) {
-//
-//			for (int k = 0; k < getColumnCount(); k++) {
-//				if (tiles[j][k].getState() == state) {
-//					number++;
-//				}
-//			}
-//
-//		}
-//		return number;
-//	}
+	public int getScore() {
+		return this.columnCount * this.rowCount * 7 - getPlayingTime();
+	}
+
+	public int getPlayingTime() {
+		return (int) ((System.currentTimeMillis() - startMillis) / 1000);
+	}
+
+	// private boolean isSolved() {
+	// return ((getRowCount() * getColumnCount()) - getNumberOf(State.OPENED) ==
+	// 0);
+	// }
+	//
+	// private int getNumberOf(Tile.State state) {
+	// int number = 0;
+	// for (int j = 0; j < getRowCount(); j++) {
+	//
+	// for (int k = 0; k < getColumnCount(); k++) {
+	// if (tiles[j][k].getState() == state) {
+	// number++;
+	// }
+	// }
+	//
+	// }
+	// return number;
+	// }
 
 }

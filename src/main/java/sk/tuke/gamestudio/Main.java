@@ -76,8 +76,8 @@ public class Main {
 //	}
 
 	@Bean
-	public GameStudioUI gameStudioUI() {
-		return new GameStudioUI();
+	public GameStudioUI gameStudioUI(UserInterface... ui) {
+		return new GameStudioUI(ui);
 	}
 
 	@Bean
@@ -122,15 +122,6 @@ public class Main {
 //		return new ScoreServiceSORM();
 //		return new ScoreServiceJPA();
 		return new ScoreServiceRestClient();
-	}
-	
-	@Bean
-	public List<UserInterface> games(UserInterface... ui) {
-		List<UserInterface> games = new ArrayList<UserInterface>();
-		for(UserInterface u : ui){
-			games.add(u);
-		}
-		return games;
 	}
 	
 	@Bean 

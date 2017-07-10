@@ -13,6 +13,8 @@ import sk.tuke.gamestudio.server.service.ScoreService;
 import sk.tuke.gamestudio.server.service.serviceJPA.CommentServiceJPA;
 import sk.tuke.gamestudio.server.service.serviceJPA.RatingServiceJPA;
 import sk.tuke.gamestudio.server.service.serviceJPA.ScoreServiceJPA;
+import sk.tuke.gamestudio.server.service.serviceJPA.UserService;
+import sk.tuke.gamestudio.server.service.serviceJPA.UserServiceJPA;
 
 @Configuration
 @SpringBootApplication
@@ -35,6 +37,10 @@ public class GameStudioServer {
 	@Bean
 	public RatingService ratingService(){
 		return new RatingServiceJPA();
+	}
+	@Bean
+	public UserService userService(){
+		return new UserServiceJPA();
 	}
 	
 

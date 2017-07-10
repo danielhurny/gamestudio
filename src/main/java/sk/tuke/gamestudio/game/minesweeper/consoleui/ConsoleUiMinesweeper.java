@@ -33,6 +33,7 @@ public class ConsoleUiMinesweeper implements UserInterface {
 	@Autowired
 	private GamePlayService gamePlayService;
 	
+	
 	/**
 	 * Reads line of text from the reader.
 	 * 

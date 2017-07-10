@@ -20,6 +20,8 @@ public class FieldKamene implements Serializable {
 	private final int columnCount;
 
 	private static final String SETTING_FILE = "Field.load";
+	
+	private long startMillis = startMillis = System.currentTimeMillis();
 
 	private int r; // suradnice empty tily
 	private int c;
@@ -234,5 +236,12 @@ public class FieldKamene implements Serializable {
 
 			}
 		}
+	}
+	public int getScore(){
+		return this.columnCount*this.rowCount*4-getPlayingTime();
+	}
+
+	public int getPlayingTime() {
+		return (int) ((System.currentTimeMillis() - startMillis) / 1000);
 	}
 }

@@ -129,3 +129,14 @@ table {
 td {
     padding: 0;
 }
+table.pexeso img{
+	width: 90px;
+	height: 90px;
+	
+}
+table.pexeso tr td{
+	padding:0px;
+	margin: 0px;
+	width: 20px;
+	
+}
