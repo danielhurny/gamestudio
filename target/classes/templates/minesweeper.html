@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="game">
+	    <p th:utext='${@minesController.renderField()}' />
+		
+		<a href="/minesweeper?command=new">New</a> <a href="/minesweeper?command=mark"><span
+			th:text='${@minesController.marking ? "Open" : "Mark"}' /></a>
+
+		<div th:text='${@minesController.message}' />
+		
+		<h2>Hraci cas:<div th:text='${@minesController.getPlayingSeconds()}' /></h2>
+		
+		
+	</div>
+</body>
+</html>

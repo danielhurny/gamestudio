@@ -3,7 +3,6 @@ package sk.tuke.gamestudio.server.controller;
 import java.util.Date;
 import java.util.Formatter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,30 +13,16 @@ import org.springframework.web.context.WebApplicationContext;
 import sk.tuke.gamestudio.game.GameState;
 import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
 import sk.tuke.gamestudio.game.kamene.core.Tile;
-
 import sk.tuke.gamestudio.server.entity.Score;
-import sk.tuke.gamestudio.server.service.CommentService;
-import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.ScoreException;
-import sk.tuke.gamestudio.server.service.ScoreService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
-public class StonesController {
+public class StonesController extends GameController {
 
 	private FieldKamene field = new FieldKamene(3, 3);
 
-	@Autowired
-	private UserController userController;
-
-	@Autowired
-	private ScoreService scoreService;
-	@Autowired
-	private CommentService commentService;
-	@Autowired
-	private RatingService ratingService;
-
-	private String message;
+	
 
 	@RequestMapping("/stones")
 	public String stones(@RequestParam(name = "command", required = false) String command,
@@ -70,7 +55,7 @@ public class StonesController {
 				field = new FieldKamene(3, 3);
 				if (userController.isLogged()) {
 					try {
-						scoreService.addScore(new Score(userController.getLoggedUser().getUsername(), "Kamene",
+						scoreService.addScore(new Score(userController.getLoggedUser().getUsername(), "stones",
 								field.getScore(), new Date()));
 					} catch (ScoreException e) {
 						// TODO Auto-generated catch block
@@ -80,18 +65,12 @@ public class StonesController {
 
 			}
 		}
-		model.addAttribute("stonesController", this);
-//		MOHOL SOM POUZIT TRY WITH RESOURC?
-		try {
-			model.addAttribute("scores", scoreService.getBestScores("Kamene"));
-			model.addAttribute("comments", commentService.getComments("Kamene"));
-			model.addAttribute("ratings", ratingService.getRating("Kamene","ja"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		model.addAttribute("game","stones");
 
-		return "stones";
+		setDataToModel("stones", model);
+
+		return "game";
 	}
 
 	public String renderField() {
@@ -107,7 +86,7 @@ public class StonesController {
 				Tile tile = field.getTile(r, c);
 				String image = getImageName(tile);
 				// "%3s", field.getTile(r, c)
-				fr.format("<a href='?row=%d&column=%d'>", r, c);
+				fr.format("<a href='/stones?row=%d&column=%d'>", r, c);
 				// fr.format("<a href='?%d'>", tile.getValue());
 				// fr.format(getImageName(tile));
 				fr.format("<img src ='/images/stones/%ska.png'>", image);

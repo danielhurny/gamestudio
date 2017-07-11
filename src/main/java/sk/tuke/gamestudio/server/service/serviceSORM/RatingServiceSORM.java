@@ -47,6 +47,12 @@ public class RatingServiceSORM implements RatingService{
 		return new RatingServiceJDBC().getRating(game, player);
 	}
 
+	@Override
+	public List<Rating> getRating(String game) throws RatingException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 

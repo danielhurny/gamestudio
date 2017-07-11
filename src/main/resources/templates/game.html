@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${game}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+	<div th:replace="header::login_bar" />
+	<div class="center">
+		<h1 th:text="${game}" />
+		<div th:replace="${game}::game" />
+
+		<div th:replace="footer::footer_bar" />
+
+	</div>
+	<script src="/js/comment_ajax.js"></script>
+</body>
+</html>

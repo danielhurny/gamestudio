@@ -24,23 +24,13 @@ import sk.tuke.gamestudio.server.service.ScoreService;
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 
-public class MinesController {
+public class MinesController extends GameController {
 	private FieldMinesweeper field = new FieldMinesweeper(9, 9, 1);
 
 	private boolean marking;
 
-	@Autowired
-	private ScoreService scoreService;
-	@Autowired
-	private CommentService commentService;
-	@Autowired
-	private RatingService ratingService;
-	@Autowired
-	private UserController userController;
 
-	private String message;
-
-	@RequestMapping("/mines")
+	@RequestMapping("/minesweeper")
 	public String mines(@RequestParam(name = "command", required = false) String command,
 			@RequestParam(name = "row", required = false) String row,
 			@RequestParam(name = "column", required = false) String column, Model model) {
@@ -89,16 +79,10 @@ public class MinesController {
 			}
 
 		}
-		model.addAttribute("minesController", this);
-		try {
-			model.addAttribute("scores", scoreService.getBestScores("minesweeper"));
-			model.addAttribute("comments", commentService.getComments("minesweeper"));
-			model.addAttribute("ratings", ratingService.getRating("minesweeper","ja"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "mines";
+		
+		model.addAttribute("game","minesweeper");
+	setDataToModel("minesweeper", model);
+		return "game";
 	}
 
 	public String renderField() {
@@ -113,7 +97,7 @@ public class MinesController {
 				Tile tile = field.getTile(r, c);
 				String image = getImageName(tile);
 				// "%3s", field.getTile(r, c)
-				fr.format("<a href='?row=%d&column=%d'>", r, c);
+				fr.format("<a href='?/minesweeper/row=%d&column=%d'>", r, c);
 				fr.format("<img src ='/images/mines/%s.png'>", image);
 				fr.format("</a>");
 				fr.format("</td>");

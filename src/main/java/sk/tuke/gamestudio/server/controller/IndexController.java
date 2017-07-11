@@ -20,7 +20,7 @@ public class IndexController {
     @RequestMapping({"", "/index"})
     public String index(Model model) {
     	try {
-			model.addAttribute("ratingKamene", ratingService.getAverageRating("kamene"));
+			model.addAttribute("ratingStones", ratingService.getAverageRating("stones"));
 			model.addAttribute("ratingMinesweeper", ratingService.getAverageRating("minesweeper"));
 			model.addAttribute("ratingPexeso", ratingService.getAverageRating("pexeso"));
 		} catch (RatingException e) {

@@ -3,7 +3,6 @@ package sk.tuke.gamestudio.server.controller;
 import java.util.Date;
 import java.util.Formatter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,32 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import sk.tuke.gamestudio.game.GameState;
-import sk.tuke.gamestudio.game.kamene.core.FieldKamene;
 import sk.tuke.gamestudio.game.pexeso.core.FieldPexeso;
 import sk.tuke.gamestudio.game.pexeso.core.Tile;
 import sk.tuke.gamestudio.game.pexeso.core.Tile.State;
 import sk.tuke.gamestudio.server.entity.Score;
-import sk.tuke.gamestudio.server.service.CommentService;
-import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.ScoreException;
-import sk.tuke.gamestudio.server.service.ScoreService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
-public class PexesoController {
+public class PexesoController extends GameController {
 	private FieldPexeso field = new FieldPexeso(4, 4);
 
-	@Autowired
-	private ScoreService scoreService;
-	@Autowired
-	private CommentService commentService;
-	@Autowired
-	private RatingService ratingService;
 
-	@Autowired
-	private UserController userController;
-
-	private String message;
 
 	@RequestMapping("/pexeso")
 	public String pexeso(@RequestParam(name = "command", required = false) String command,
@@ -77,17 +62,11 @@ public class PexesoController {
 				}
 
 			}}
-		model.addAttribute("pexesoController", this);
-		try {
-			model.addAttribute("scores", scoreService.getBestScores("pexeso"));
-			model.addAttribute("comments", commentService.getComments("pexeso"));
-			model.addAttribute("ratings", ratingService.getRating("minesweeper","ja"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		model.addAttribute("game","pexeso");
+		setDataToModel("minesweeper", model);
 
-		return "pexeso";
+		return "game";
 
 	}
 
@@ -104,7 +83,7 @@ public class PexesoController {
 				Tile tile = field.getTile(r, c);
 				String image = getImageName(tile);
 				// "%3s", field.getTile(r, c)
-				fr.format("<a href='?row=%d&column=%d'>", r, c);
+				fr.format("<a href='/pexeso?row=%d&column=%d'>", r, c);
 				// fr.format("<a href='?%d'>", tile.getValue());
 				// fr.format(getImageName(tile));
 				fr.format("<img src ='/images/stones/%ska.png'>", image);

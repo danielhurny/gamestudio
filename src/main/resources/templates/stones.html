@@ -1,27 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Kamene</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="/css/stylesheet.css" />
-</head>
+
 <body>
-	<div th:replace="header::login_bar" />
+	<div th:fragment="game">
 
-	<h1>Kamene</h1>
-
-	<p th:utext='${stonesController.renderField()}' />
-	<a href="?command=new">New</a>
-	<div th:text='${stonesController.message}' />
-	<ol>
-		<li th:each="score:${scores}"><span th:text="${score.player}" />
-			<span th:text="${score.points}" /></li>
-	</ol>
+	<p th:utext='${@stonesController.renderField()}' />
+	<a href="/stones?command=new">New</a>
+	<div th:text='${@stonesController.message}' />
+	
 	
 		Hraci cas:
-		<div th:text='${stonesController.getPlayingSeconds()}' />
+		<div th:text='${@stonesController.getPlayingSeconds()}' />
 		
-		<div th:replace="footer::footer_bar" />
+		</div>
 		
 	
 	

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import sk.tuke.gamestudio.sorm.Column;
 import sk.tuke.gamestudio.sorm.Table;
@@ -22,7 +24,8 @@ public class Comment {
 	private String game;
 	@Column(name="comment")
 	private String comment;
-	@Column(name="commentedon")
+//	@Column(name="commentedon")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
 	

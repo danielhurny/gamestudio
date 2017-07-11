@@ -1,5 +1,7 @@
 package sk.tuke.gamestudio.server.service.serviceJPA;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -48,5 +50,14 @@ public class RatingServiceJPA implements RatingService {
 		return o == null ? -1 : ((Double) o).intValue();
 
 	}
+	public List<Rating> getRating(String game) throws RatingException {
+		// TODO Auto-generated method stub
+		return entityManager
+				.createQuery("select r from Rating r where r.game = :game")
+				.setParameter("game", game).getResultList();
+		
+
+	}
+	
 
 }

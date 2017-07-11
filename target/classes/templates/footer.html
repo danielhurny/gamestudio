@@ -1,31 +1,66 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="${game}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
 <body>
 
-	<div th:fragment="footer_bar">
 
-		<p>Score:
+
+
+	<div th:fragment="footer_bar">
+		
+
+		<br />
+		<h2>Score:</h2>
 		<ol>
 			<li th:each="score:${scores}"><span th:text="${score.player}" />
 				<span th:text="${score.points}" /></li>
 		</ol>
-		</p>
 
-		<p>Comments:
+
+		<h2>Comments:</h2>
 		<ol>
 			<li th:each="comment:${comments}"><span
-				th:text="${comment.player}" />
-				<span th:text="${comment.date}" />
+				th:text="${comment.player}" /> <span th:text="${comment.date}" />
 				<span th:text="${comment.comment}" /></li>
-			
-		</ol>
-		</p>
-		
-		
 
-		
-		
-</div>
+		</ol>
+
+
+		<h2>Ratings:</h2>
+		<ol>
+			<li th:each="rating:${ratings}"><span th:text="${rating.player}" />
+				<span th:text="${rating.ratedon}" /> <span
+				th:text="${rating.rating}" /></li>
+
+		</ol>
+
+		<p th:if="${@userController.loggedUser != null}">
+		<h2>Adding Comments</h2>
+		<form>
+			<input type="hidden" name="game" id="inputGameName"
+				th:value="${game}" /> <input type="text" name="comment"
+				id="inputComment" /> <input type="button" id="addComment"
+				value="Add" />
+		</form>
+		</p>
+
+
+		<table id="table_ajax">
+		</table>
+
+
+
+
+
+
+
+
+
+	</div>
 
 </body>
 </html>

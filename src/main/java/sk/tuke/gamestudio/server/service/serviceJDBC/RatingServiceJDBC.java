@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import sk.tuke.gamestudio.server.entity.Rating;
 import sk.tuke.gamestudio.server.service.DatabaseSettings;
@@ -77,5 +78,13 @@ public class RatingServiceJDBC implements RatingService {
 
 		return rating;
 	}
+
+	@Override
+	public List<Rating> getRating(String game) throws RatingException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

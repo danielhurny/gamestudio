@@ -1,5 +1,7 @@
 package sk.tuke.gamestudio.server.service;
 
+import java.util.List;
+
 import sk.tuke.gamestudio.server.entity.Rating;
 
 public interface RatingService {
@@ -8,5 +10,6 @@ public interface RatingService {
     double getAverageRating(String game) throws RatingException;
 		
     int getRating(String game, String player) throws RatingException;
-		
+	
+    List<Rating> getRating(String game) throws RatingException;
 }

@@ -51,4 +51,12 @@ public class RatingServiceRestClient implements RatingService {
 			throw new RatingException("Rating exception");
 		}
 	}
+
+	@Override
+	public List<Rating> getRating(String game) throws RatingException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
