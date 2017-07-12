@@ -18,29 +18,30 @@ import sk.tuke.gamestudio.server.service.RatingException;
 import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.ScoreException;
 
-
 @Path("/rating")
 public class RatingRestService {
 	@Autowired
 	RatingService ratingService;
-	
+
 	@POST
 	@Consumes("application/json")
-	public Response addRating(Rating rating) throws RatingException{
+	public Response addRating(Rating rating) throws RatingException {
 		ratingService.setRating(rating);
 		return Response.ok().build();
 	}
-	
+
 	@GET
 	@Path("/{game}/{player}")
 	@Produces("application/json")
-	public int getRating(@PathParam("game") String game,@PathParam("player") String player) throws RatingException{
+	public int getRating(@PathParam("game") String game, @PathParam("player") String player) throws RatingException {
 		return ratingService.getRating(game.toLowerCase(), player);
 	}
+
 	@GET
 	@Path("/{game}")
 	@Produces("application/json")
-	public double getAverageRating(@PathParam("game") String game) throws RatingException{
-		return ratingService.getAverageRating(game.toLowerCase());}
+	public double getAverageRating(@PathParam("game") String game) throws RatingException {
+		return ratingService.getAverageRating(game.toLowerCase());
+	}
 
 }

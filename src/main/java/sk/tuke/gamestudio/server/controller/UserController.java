@@ -27,7 +27,12 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login(User user, Model model) {
-        user = userService.login(user.getUsername(), user.getPasswd());
+    	
+        try {
+			user = userService.login(user.getUsername(), user.getPasswd());
+		} catch (Exception e) {
+			return "login";
+		}
         loggedUser = user;
         return "index";
     }

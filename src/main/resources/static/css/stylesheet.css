@@ -121,10 +121,7 @@ a:link:hover, a:visited:hover  {
   padding: 10px;
 }
 
-table {
-    border-collapse: collapse;
-    border: none;
-}
+
 
 td {
     padding: 0;

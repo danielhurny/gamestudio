@@ -4,6 +4,7 @@
 <title th:text="${game}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="/css/stylesheet.css" />
+<link rel="stylesheet" href="/css/stylesheetMY.css" />
 </head>
 <body>
 
@@ -11,7 +12,7 @@
 
 
 	<div th:fragment="footer_bar">
-		
+
 
 		<br />
 		<h2>Score:</h2>
@@ -22,12 +23,8 @@
 
 
 		<h2>Comments:</h2>
-		<ol>
-			<li th:each="comment:${comments}"><span
-				th:text="${comment.player}" /> <span th:text="${comment.date}" />
-				<span th:text="${comment.comment}" /></li>
-
-		</ol>
+		<table id="table_ajax">
+		</table>
 
 
 		<h2>Ratings:</h2>
@@ -42,14 +39,43 @@
 		<h2>Adding Comments</h2>
 		<form>
 			<input type="hidden" name="game" id="inputGameName"
-				th:value="${game}" /> <input type="text" name="comment"
+				th:value="${game}" />
+				<input type="hidden" name="player" id="inputPlayerName"
+				th:value="${@userController.loggedUser.username}" /> <input type="text" name="comment"
 				id="inputComment" /> <input type="button" id="addComment"
 				value="Add" />
 		</form>
 		</p>
 
+<p th:if="${@userController.loggedUser != null}">
+		<fieldset class="rating">
+    <input onclick= "rating(this)" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+   
+    <input onclick= "rating(this)" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    
+    <input onclick= "rating(this)" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    
+    <input onclick= "rating(this)" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    
+    <input onclick= "rating(this)" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    
+</fieldset>
 
-		<table id="table_ajax">
+
+<form action ="/rating" method ="POST">
+			<input type="hidden" name="game" id="inputGameName"
+				th:value="${game}" />
+				<input type="hidden" name="player" id="inputPlayerName"
+				th:value="${@userController.loggedUser.username}" /> <input type="hidden" name="rating"
+				id="inputRating" /> <input type="submit" id="addRating"
+				value="Add Rating" />
+		</form>
+		</p>
+<br/>
+<br/>
+
+
+		<table class ="table table-striped" id="table_ajax">
 		</table>
 
 
@@ -60,7 +86,9 @@
 
 
 
+
 	</div>
+	<script src="/js/comment_ajax.js"></script>
 
 </body>
 </html>

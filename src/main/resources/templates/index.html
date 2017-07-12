@@ -4,20 +4,53 @@
 <title>Gamestudio</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="/css/stylesheet.css" />
+<link rel="stylesheet" href="/css/stylesheetMY.css" />
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var minesweeperRating = [[${ratingMinesweeper}]]*20;
+    var pexesoRating = [[${ratingPexeso}]]*20;
+    var stonesRating = [[${ratingStones}]]*20;
+    console.log(message);
+    
+    function setRating(){
+    	document.getElementById("ratingMinesweeper").style.width= minesweeperRating+"%";
+    	document.getElementById("ratingPexeso").style.width= pexesoRating+"%";
+    	document.getElementById("ratingStones").style.width= stonesRating+"20%";
+    	
+    }
+
+/*]]>*/
+</script>
+
 </head>
-<body>
+<body onload = "setRating();">
+
 
 	<div th:replace="header::login_bar" />
 
 	<h1>Games</h1>
 	<ol>
-		<li>minesweeper <a href="/minesweeper">here</a> <br /> <span
+		<li>minesweeper <a href="/minesweeper">here</a> <br /> <span 
 			th:text="${ratingMinesweeper}" /></li>
-		<li>stones <a href="/stones">here</a><br /><span
+			<div class="star-ratings-css">
+  <div id = "ratingMinesweeper" class="star-ratings-css-top" style="width: 0%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+</div>
+		<li>stones <a href="/stones">here</a><br /><span 
 			th:text="${ratingStones}" /></li>
-		<li>pexeso <a href="/pexeso">here</a><br /><span
+				<div class="star-ratings-css">
+  <div id = "ratingStones" class="star-ratings-css-top" style="width: 0%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+</div>
+		<li>pexeso <a href="/pexeso">here</a><br /><span 
 			th:text="${ratingPexeso}" /></li>
+				<div class="star-ratings-css">
+  <div id = "ratingPexeso" class="star-ratings-css-top" style="width: 0%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+</div>
 	</ol>
 
+<script src="/js/comment_ajax.js"></script>
 </body>
 </html>

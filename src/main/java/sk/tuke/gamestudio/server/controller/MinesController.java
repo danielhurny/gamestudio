@@ -97,7 +97,7 @@ public class MinesController extends GameController {
 				Tile tile = field.getTile(r, c);
 				String image = getImageName(tile);
 				// "%3s", field.getTile(r, c)
-				fr.format("<a href='?/minesweeper/row=%d&column=%d'>", r, c);
+				fr.format("<a href='/minesweeper?row=%d&column=%d'>", r, c);
 				fr.format("<img src ='/images/mines/%s.png'>", image);
 				fr.format("</a>");
 				fr.format("</td>");
