@@ -34,20 +34,21 @@ public class UserController {
 			return "login";
 		}
         loggedUser = user;
-        return "index";
+        return "forward:/index";
     }
 
     @RequestMapping("/register")
     public String register(User user, Model model) {
+    	if(user.getUsername()==user.getVerifiedPasswd()){
         user = userService.register(user.getUsername(), user.getPasswd());
-        loggedUser = user;
-        return "index";
+        loggedUser = user;}
+        return "forward:/index";
     }
 
     @RequestMapping("/logout")
     public String logout() {
         loggedUser = null;
-        return "index";
+        return "forward:/index";
     }
 
     public User getLoggedUser() {

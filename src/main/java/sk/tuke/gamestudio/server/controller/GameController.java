@@ -9,6 +9,7 @@ import sk.tuke.gamestudio.server.service.RatingException;
 import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.ScoreException;
 import sk.tuke.gamestudio.server.service.ScoreService;
+import sk.tuke.gamestudio.server.service.StatisticService;
 
 public abstract class GameController  {
 	
@@ -20,6 +21,8 @@ public abstract class GameController  {
 	protected RatingService ratingService;
 	@Autowired
 	protected UserController userController;
+	@Autowired
+	protected StatisticService statisticService;
 	
 	protected String message;
 	

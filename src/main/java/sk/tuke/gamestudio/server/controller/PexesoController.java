@@ -64,7 +64,7 @@ public class PexesoController extends GameController {
 			}}
 		
 		model.addAttribute("game","pexeso");
-		setDataToModel("minesweeper", model);
+		setDataToModel("pexeso", model);
 
 		return "game";
 

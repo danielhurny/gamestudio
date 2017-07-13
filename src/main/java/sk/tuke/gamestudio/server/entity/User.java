@@ -19,7 +19,11 @@ public class User {
     @Transient
     private String verifiedPasswd;
 
-    public User() {
+    public String getVerifiedPasswd() {
+		return verifiedPasswd;
+	}
+
+	public User() {
     }
 
     public User(String username, String passwd) {

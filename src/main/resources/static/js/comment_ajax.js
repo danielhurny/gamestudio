@@ -1,18 +1,13 @@
 
-var game=$("#inputGameName").val();
-
 $(document).ready(function() {
-ratingGames();	
+
 getComment();	
-	
-	var game = "";
 	
 	    $("#addComment").click(function(e) {
 	        e.preventDefault(); //add this line to prevent reload
-	        game = $("#inputGameName").val();
 	        player =$("#inputPlayerName").val();
 	        commentDate = new Date().toJSON(); 
-	        console.log(game);
+	        console.log(gameName);
 	        console.log(commentDate);
 	       
 	        var comment = $("#inputComment").val();
@@ -22,7 +17,7 @@ getComment();
 	        		  url: "/rest/comment",
 	        		  contentType : "application/json",
 	        		  method: "POST",
-	        		  data: JSON.stringify({"game": game, "comment": comment, "player": player, "date": commentDate })
+	        		  data: JSON.stringify({"game": gameName, "comment": comment, "player": player, "date": commentDate })
 	        		}
 
 	        		$.ajax(settings).done(function (response) {
@@ -43,7 +38,7 @@ function getComment(){
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8888/rest/comment/"+game,
+        "url": "http://localhost:8888/rest/comment/"+gameName,
         "method": "GET",
         "headers": {
             "content-type": "application/json",
@@ -79,12 +74,7 @@ function rating(obj) {
 	document.getElementById('inputRating').value = numOfStars;
 	
 }
-function ratingGames() {
-	var ratingPexeso = [[${ratingPexeso}]];
-	var ratingMinesweeper = [[${ratingMinesweeper}]];
-	var ratingStones = [[${ratingStones}]];
-	console.log(ratingMinesweeper);
-}
+
 
 
 

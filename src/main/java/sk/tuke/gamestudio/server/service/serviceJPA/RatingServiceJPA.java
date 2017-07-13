@@ -47,7 +47,7 @@ public class RatingServiceJPA implements RatingService {
 		Object o = entityManager
 				.createQuery("select avg(r.rating) from Rating r where r.game = :game and r.player = :player")
 				.setParameter("game", game).setParameter("player", player).getSingleResult();
-		return o == null ? -1 : ((Double) o).intValue();
+		return o == null ? -1 : Math.round(((Double) o).intValue());
 
 	}
 	public List<Rating> getRating(String game) throws RatingException {

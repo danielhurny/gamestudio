@@ -10,9 +10,11 @@ import sk.tuke.gamestudio.server.service.GamePlayService;
 import sk.tuke.gamestudio.server.service.GamePlayServiceJPA;
 import sk.tuke.gamestudio.server.service.RatingService;
 import sk.tuke.gamestudio.server.service.ScoreService;
+import sk.tuke.gamestudio.server.service.StatisticService;
 import sk.tuke.gamestudio.server.service.serviceJPA.CommentServiceJPA;
 import sk.tuke.gamestudio.server.service.serviceJPA.RatingServiceJPA;
 import sk.tuke.gamestudio.server.service.serviceJPA.ScoreServiceJPA;
+import sk.tuke.gamestudio.server.service.serviceJPA.StatisticServiceJPA;
 import sk.tuke.gamestudio.server.service.serviceJPA.UserService;
 import sk.tuke.gamestudio.server.service.serviceJPA.UserServiceJPA;
 
@@ -41,6 +43,10 @@ public class GameStudioServer {
 	@Bean
 	public UserService userService(){
 		return new UserServiceJPA();
+	}
+	@Bean
+	public StatisticService statisticService(){
+		return new StatisticServiceJPA();
 	}
 	
 
