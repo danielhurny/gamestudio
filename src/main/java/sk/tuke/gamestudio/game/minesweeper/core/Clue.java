@@ -27,13 +27,6 @@ public class Clue extends Tile {
 
 		
 		 return(getState()== State.OPEN ? ((((Integer) value)).toString()):super.toString()); 
-//		if (getState() == State.CLOSED) {
-//			return " -";
-//		} else if (getState() == State.MARKED) {
-//			return " M";
-//		}
-//		return ((((Integer) value)).toString());
-//
-//	}
+
 
 }}

@@ -38,11 +38,15 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String register(User user, Model model) {
-    	if(user.getUsername()==user.getVerifiedPasswd()){
+    public String register(User user, String verifiedPasswd, Model model) {
+    	System.out.println(user.getPasswd());
+    	System.out.println(user.getUsername());
+    	System.out.println("verified: "+user.getVerifiedPasswd());
+    	if(user.getPasswd().equals(verifiedPasswd)){
         user = userService.register(user.getUsername(), user.getPasswd());
         loggedUser = user;}
         return "forward:/index";
+        
     }
 
     @RequestMapping("/logout")

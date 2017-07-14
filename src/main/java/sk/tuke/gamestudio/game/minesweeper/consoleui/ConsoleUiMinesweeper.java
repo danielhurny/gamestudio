@@ -32,8 +32,7 @@ public class ConsoleUiMinesweeper implements UserInterface {
 
 	@Autowired
 	private GamePlayService gamePlayService;
-	
-	
+
 	/**
 	 * Reads line of text from the reader.
 	 * 
@@ -123,16 +122,15 @@ public class ConsoleUiMinesweeper implements UserInterface {
 				break;
 			}
 		} while (field.getState() == GameState.PLAYING);
-		
-		//save gameplay
-				GamePlay gamePlay = field.getGamePlay();
-				if(gamePlay!=null){
-				gamePlayService.save(gamePlay);	
-				}
-		
+
+		// save gameplay
+		GamePlay gamePlay = field.getGamePlay();
+		if (gamePlay != null) {
+			gamePlayService.save(gamePlay);
+		}
+
 		return score;
-		
-		
+
 	}
 
 	@Override

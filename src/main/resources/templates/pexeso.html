@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-	<div th:fragment="game">
+	<div class="centerMe" th:fragment="game">
 	<p th:utext='${@pexesoController.renderField()}' />
 	<a href="/pexeso?command=new">New</a>
 	<div th:text='${@pexesoController.message}' />

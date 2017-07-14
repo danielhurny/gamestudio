@@ -10,13 +10,14 @@
 
 fieldset, label { margin: 0; padding: 0; }
 body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+
 
 /****** Style Star Rating Widget *****/
 
 .rating { 
   border: none;
   float: left;
+  margin-right: 47px;
 }
 
 .rating > input { display: none; } 
@@ -76,4 +77,59 @@ h1 { font-size: 1.5em; margin: 10px; }
   padding: 0;
   display: block;
   z-index: 0;
+}
+.centerMe{
+	width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+	
+}
+.myButton{
+	background-color: #4CAF50;
+}
+.bg {
+    /* The image used */
+    background-image: url("http://zellox.com/wp-content/uploads/2016/05/website-backgrounds-%E2%80%AB1%E2%80%AC-%E2%80%AB%E2%80%AC.jpg");
+    background-color: #7F92A3;
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgGame {
+    /* The image used */
+    background-image: url("/images/background/background.jpg");
+    background-color: #7F92A3;
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bgStatistic {
+   background-color: #7F92A3;
+}
+#statisticButton{
+	background-color: pink;
+}
+.tables{
+	font-style: italic;
+	font-weight: bold;
+	overflow-y:scroll; 
+height:300px; 
+display:block;  
+border:10px solid transparent;
+}
+#mainPage{
+	text-align:center;
+	margin-bottom:80px;
+	 font-size:  90px;
+	
+	
 }

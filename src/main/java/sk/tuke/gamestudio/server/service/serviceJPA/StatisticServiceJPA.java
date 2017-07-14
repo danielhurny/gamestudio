@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import sk.tuke.gamestudio.server.dto.Statistic;
 import sk.tuke.gamestudio.server.entity.Rating;
-import sk.tuke.gamestudio.server.entity.Statistic;
 import sk.tuke.gamestudio.server.service.RatingException;
 import sk.tuke.gamestudio.server.service.ScoreException;
 import sk.tuke.gamestudio.server.service.StatisticService;

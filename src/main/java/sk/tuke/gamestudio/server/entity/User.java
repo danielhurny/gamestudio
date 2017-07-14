@@ -30,6 +30,7 @@ public class User {
         this.username = username;
         this.passwd = passwd;
     }
+    
 
     public int getId() {
         return id;

@@ -1,6 +1,6 @@
 package sk.tuke.gamestudio.server.service;
 
-import sk.tuke.gamestudio.server.entity.Statistic;
+import sk.tuke.gamestudio.server.dto.Statistic;
 
 public interface StatisticService {
 

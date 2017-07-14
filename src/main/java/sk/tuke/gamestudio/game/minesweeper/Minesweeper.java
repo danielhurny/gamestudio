@@ -29,12 +29,6 @@ public class Minesweeper {
         
     }
  
-    
-	
-    
-  
-
-	
 
 	public Settings getSetting() {
 		return setting;

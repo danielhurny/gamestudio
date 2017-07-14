@@ -10,21 +10,14 @@
 <link rel="stylesheet" href="/css/stylesheet.css" />
 <link rel="stylesheet" href="/css/stylesheetMY.css" />
 </head>
-<body>
+<body class = "bg">
 	<div th:replace="header::login_bar" />
 
-	<h1>Games</h1>
-	<ol>
-		<li>minesweeper <a href="/minesweeper">here</a> <br /> <span
-			th:text="${ratingMinesweeper}" /></li>
-
-		<li>stones <a href="/stones">here</a><br />
-		<span th:text="${ratingStones}" /></li>
-
-		<li>pexeso <a href="/pexeso">here</a><br />
-		<span th:text="${ratingPexeso}" /></li>
-
-	</ol>
+	
+	<h1 id="mainPage">Game Studio</h1>
+	
+	
+	
 
 	<div class="container">
 		<!-- Example row of columns -->
@@ -46,7 +39,7 @@
 					</div>
 				</div>
 				<p>
-					<a class="btn btn-default" href="/minesweeper" role="button">Play
+					<a class="btn btn-default myButton" href="/minesweeper" role="button">Play
 						&raquo;</a>
 				</p>
 			</div>
@@ -67,13 +60,13 @@
 					</div>
 				</div>
 				<p>
-					<a class="btn btn-default" href="/stones" role="button">Play
+					<a class="btn btn-default myButton" href="/stones" role="button">Play
 						&raquo;</a>
 				</p>
 			</div>
 			<div class="col-md-4">
 				<h2>Pexeso</h2>
-				<img src ='images/index/pexeso.PNG' height="230" width="240"/>
+				<img src ='images/index/pexeso.PNG' height="240" width="240"/>
 				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
 					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
 					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
@@ -88,13 +81,13 @@
 					</div>
 				</div>
 				<p>
-					<a class="btn btn-default" href="/pexeso" role="button">Play
+					<a class="btn btn-default myButton" href="/pexeso" role="button">Play
 						&raquo;</a>
 				</p>
 			</div>
 		</div>
 	</div>
-	<div class= "text-center"><a class="btn btn-default" href="/statistic" role="button">Statistics
+	<div  class= "text-center"><a id = "statisticButton" class="btn btn-default" href="/statistic" role="button">Statistics
 				</a></div>
 
 	<script src="/js/comment_ajax.js"></script>

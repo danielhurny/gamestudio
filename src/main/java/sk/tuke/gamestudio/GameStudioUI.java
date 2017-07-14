@@ -29,7 +29,7 @@ public class GameStudioUI {
 	private CommentService commentservice;
 	@Autowired
 	private RatingService ratingservice;
-	
+
 	private UserInterface[] games;
 
 	Scanner sc = new Scanner(System.in);
@@ -42,12 +42,6 @@ public class GameStudioUI {
 	}
 
 	public void play() {
-//		try {
-//			ratingservice.getAverageRating("Minesweeper");
-//		} catch (RatingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		processInput();
 		addScore(gamescore);
 		while (true) {
@@ -91,7 +85,6 @@ public class GameStudioUI {
 
 	private void services() {
 
-
 		System.out.println("Aku akciu chces vykonat?"
 				+ "\n pre vyber hry -vyber\n pre vypis komentarov -c\n pre vypis ratingu -r\n pre vypis score -b\n pre pridanie komentara - m\n"
 				+ " pre pridanie ratingu -rate\n pre zistenie ratingu od konkretneho hraca - player\n pre exit - exit");
@@ -117,12 +110,11 @@ public class GameStudioUI {
 
 				}
 
-			}else if (matcher.group(1).equals("vyber")) {
-				gamePlayed="";
+			} else if (matcher.group(1).equals("vyber")) {
+				gamePlayed = "";
 				processInput();
-				
 
-			}  else if (matcher.group(1).equals("rate")) {
+			} else if (matcher.group(1).equals("rate")) {
 				System.out.println("Zadaj rating:");
 				int rate = Integer.parseInt(sc.nextLine());
 				try {

@@ -10,42 +10,75 @@
 <link rel="stylesheet" href="/css/stylesheet.css" />
 <link rel="stylesheet" href="/css/stylesheetMY.css" />
 </head>
-<body>
+<body class = "bgStatistic">
 	<div th:replace="header::login_bar" />
 
 	<h1>Statistic</h1>
-	
+
 
 	<div class="container">
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-4">
 				<h2>Minesweeper</h2>
-				<p><div th:text="'Game Rating: '+ ${ratingMinesweeper}"/></p>
-				<p><div th:text="'Best Achieved Score: '+ ${statisticMinesweeper.bestScore}"/></p>
-				<p><span>Achieved by:</span>
-				<div style="width:10px" th:text=" ${statisticMinesweeper.bestPlayers}"/></p>
-				<p><div th:text="'Times Played: '+ ${statisticMinesweeper.gamesPlayed}"/></p>
-				
+				<p>
+				<div th:text="'Game Rating: '+ ${ratingMinesweeper}" />
+				</p>
+				<p>
+				<div
+					th:text="'Best Achieved Score: '+ ${statisticMinesweeper.bestScore}" />
+				</p>
+				<p>
+					<span>Achieved by: <span th:text="${statisticMinesweeper.bestPlayers.size()}"/> player(s)</span>
+				<ol>
+					<li th:each="player : ${statisticMinesweeper.bestPlayers}" th:text="${player}" />
+				</ol>
+				</p>
+
+				<p>
+				<div th:text="'Times Played: '+ ${statisticMinesweeper.gamesPlayed}" />
+				</p>
+
 			</div>
 			<div class="col-md-4">
 				<h2>Stones</h2>
-				<p><div th:text="'Game Rating: '+ ${ratingStones}"/></p>
-				<p><div th:text="'Best Achieved Score: '+ ${statisticStones.bestScore}"/></p>
-				<p><span>Achieved by:</span>
-				<div style="width:10px" th:text=" ${statisticStones.bestPlayers}"/></p>
-				<p><div th:text="'Times Played: '+ ${statisticStones.gamesPlayed}"/></p>
-				
-				
+				<p>
+				<div th:text="'Game Rating: '+ ${ratingStones}" />
+				</p>
+				<p>
+				<div th:text="'Best Achieved Score: '+ ${statisticStones.bestScore}" />
+				</p>
+				<p>
+					<span>Achieved by: <span th:text="${statisticStones.bestPlayers.size()}"/> player(s)</span>
+				<ol>
+					<li th:each="player : ${statisticStones.bestPlayers}" th:text="${player}" />
+				</ol>
+				</p>
+				<p>
+				<div th:text="'Times Played: '+ ${statisticStones.gamesPlayed}" />
+				</p>
+
+
 			</div>
 			<div class="col-md-4">
 				<h2>Pexeso</h2>
-				<p><div th:text="'Game Rating: '+ ${ratingPexeso}"/></p>
-				<p><div th:text="'Best Achieved Score: '+ ${statisticPexeso.bestScore}"/></p>
-				<p><span>Achieved by:</span>
-				<div style="width:10px" th:text=" ${statisticPexeso.bestPlayers}"/></p>
-				<p><div th:text="'Times Played: '+ ${statisticPexeso.gamesPlayed}"/></p>
-				
+				<p>
+				<div th:text="'Game Rating: '+ ${#numbers.formatDecimal(ratingPexeso, 1, 2)}" />
+				</p>
+				<p>
+				<div th:text="'Best Achieved Score: '+ ${statisticPexeso.bestScore}" />
+				</p>
+				<p>
+					<span>Achieved by: <span th:text="${statisticPexeso.bestPlayers.size()}"/> player(s)</span>
+				<ol>
+					<li th:each="player : ${statisticPexeso.bestPlayers}" th:text="${player}" />
+				</ol>
+				</p>
+
+				<p>
+				<div th:text="'Times Played: '+ ${statisticPexeso.gamesPlayed}" />
+				</p>
+
 			</div>
 		</div>
 	</div>

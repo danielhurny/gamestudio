@@ -1,11 +1,11 @@
-package sk.tuke.gamestudio.server.entity;
+package sk.tuke.gamestudio.server.dto;
 
 import java.util.List;
 
 public class Statistic {
-	int bestScore;
-	List<String> bestPlayers;
-	int gamesPlayed;
+	private int bestScore;
+	private List<String> bestPlayers;
+	private int gamesPlayed;
 
 	public Statistic(){
 		
@@ -19,14 +19,17 @@ public class Statistic {
 		this.bestScore = bestScore;
 	}
 
-	public String getBestPlayers() {
-		StringBuilder sb = new StringBuilder();
-		for(int i=0;i<bestPlayers.size();i++){
-			sb.append(bestPlayers.get(i)+"\n");
-		}
-		return sb.toString();
-		
+	public List<String> getBestPlayers() {
+		return bestPlayers;
 	}
+//	public String getBestPlayers() {
+//		StringBuilder sb = new StringBuilder();
+//		for(int i=0;i<bestPlayers.size();i++){
+//			sb.append(bestPlayers.get(i)+"\n");
+//		}
+//		return sb.toString();
+//		
+//	}
 
 	public void setBestPlayers(List<String> bestPlayers) {
 		this.bestPlayers = bestPlayers;

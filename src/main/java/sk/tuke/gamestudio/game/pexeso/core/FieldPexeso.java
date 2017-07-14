@@ -122,23 +122,4 @@ public class FieldPexeso {
 		return (int) ((System.currentTimeMillis() - startMillis) / 1000);
 	}
 
-	// private boolean isSolved() {
-	// return ((getRowCount() * getColumnCount()) - getNumberOf(State.OPENED) ==
-	// 0);
-	// }
-	//
-	// private int getNumberOf(Tile.State state) {
-	// int number = 0;
-	// for (int j = 0; j < getRowCount(); j++) {
-	//
-	// for (int k = 0; k < getColumnCount(); k++) {
-	// if (tiles[j][k].getState() == state) {
-	// number++;
-	// }
-	// }
-	//
-	// }
-	// return number;
-	// }
-
 }

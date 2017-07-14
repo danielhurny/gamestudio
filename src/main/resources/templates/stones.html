@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-	<div th:fragment="game">
+	<div class="centerMe" th:fragment="game">
 
 	<p th:utext='${@stonesController.renderField()}' />
 	<a href="/stones?command=new">New</a>
