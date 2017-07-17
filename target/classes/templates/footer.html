@@ -19,7 +19,7 @@
          <div class="col-md-4 col-md-offset-1">
 		<h2>Score:</h2>
 		<table class=" table tables">
-			<tr th:each="score:${scores}"><td th:text="${score.player}" />
+			<tr th:each="score, num:${scores}"><td th:text="${num.count}" >1</td><td th:text="${score.player}" />
 				<td th:text="${score.points}" /></tr>
 		
 		</table>

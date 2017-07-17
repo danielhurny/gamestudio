@@ -3,10 +3,6 @@ package sk.tuke.gamestudio.server.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +11,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import sk.tuke.gamestudio.server.entity.Comment;
 import sk.tuke.gamestudio.server.service.CommentException;
-import sk.tuke.gamestudio.server.service.CommentService;
-import sk.tuke.gamestudio.server.service.RatingService;
-import sk.tuke.gamestudio.server.service.ScoreService;
 
 
 @Controller

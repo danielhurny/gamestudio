@@ -26,7 +26,7 @@ public class RatingController extends GameController {
 	
 	public String rating(Rating rating, Model model){
 		rating.setRatedon(new Timestamp(new Date().getTime()));
-		rating.setPlayer(userController.getLoggedUser().getUsername());
+//		rating.setPlayer(userController.getLoggedUser().getUsername());
 		try {
 			ratingService.setRating(rating);
 		} catch (RatingException e) {

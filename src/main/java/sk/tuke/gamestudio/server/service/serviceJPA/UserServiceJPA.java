@@ -13,6 +13,7 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public User login(String username, String passwd) {
+    	
         return (User)entityManager.createNamedQuery("User.login")
                 .setParameter("username", username).setParameter("passwd", passwd).getSingleResult();
     }

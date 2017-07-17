@@ -10,6 +10,7 @@
 
 <div th:replace="header::login_bar"></div>
 
+<div th:text='${@userController.message}' />
 
 <div class="row">
   <div class="col-md-2 col-md-offset-4"><h2>Please log in</h2>
@@ -21,6 +22,7 @@
     Password: <input class="form-control" name="passwd" type="password"/> <br/>
     <input type="submit" value="OK"/>
 </form></div>
+
   <div class="col-md-2"><h2>Register</h2>
 <form action="/register" method="post">
     Login: <input class="form-control" name="username" type="text" th:value="${user?.username}"/> <br/>

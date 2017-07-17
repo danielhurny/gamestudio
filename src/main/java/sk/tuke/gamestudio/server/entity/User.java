@@ -19,10 +19,6 @@ public class User {
     @Transient
     private String verifiedPasswd;
 
-    public String getVerifiedPasswd() {
-		return verifiedPasswd;
-	}
-
 	public User() {
     }
 
@@ -52,6 +48,15 @@ public class User {
         this.passwd = passwd;
     }
 
+
+    public String getVerifiedPasswd() {
+		return verifiedPasswd;
+	}
+
+    public void setVerifiedPasswd(String verifiedPasswd) {
+		this.verifiedPasswd = verifiedPasswd;
+	}
+    
     @Override
     public String toString() {
         return "User{" +
